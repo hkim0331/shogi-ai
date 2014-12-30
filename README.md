@@ -17,3 +17,10 @@ WebSocket 通信プログラムサンプル。
 $ ccl --load downup.lisp
 ````
 
+## FIXME
+
+* ql:quickload のタイミング
+* find-action あたり。直接 *websocket-dispatch-table* にプッシュじゃまずいのか？
+* huncheksocket:client-connected, client-disconnected, text-message-received はどんなメソッドか？デリゲートと思っていいのか？
+
+
