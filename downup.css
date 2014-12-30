@@ -1,0 +1,13 @@
+body {
+    font-family: sans-serif;
+}
+
+h1 {
+    color: blue;
+}
+
+div#ws {
+	background-color: #ADD8E6;
+	border: 1px inset #00008B;
+	width: 400px;
+}
