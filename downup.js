@@ -34,42 +34,30 @@ function testWebSocket() {
 }
 
 function onOpen(evt) {
-    writeToScreen("CONNECTED");
-    writeToSent("please drag any place");
-    writeToReceived("answer from LISP will appear here");
+    writeTo(output,   "CONNECTED");
+    writeTo(sent,     "please drag any place");
+    writeTo(received, "answer from LISP will appear here");
 }
 
-// function onClick(evt) {
-//     doSend("son of a bitch");
-// }
-
 function onClose(evt) {
-    writeToScreen("DISCONNECTED");
+    writeTo(output,"DISCONNECTED");
 }
 
 function onMessage(evt) {
-    writeToReceived('<span style="color: blue;">' + evt.data+'</span>');
+    writeTo(received,'<span style="color: blue;">' + evt.data+'</span>');
 }
 
 function onError(evt) {
-    writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+    writeTo(output,'<span style="color: red;">ERROR:</span> ' + evt.data);
 }
 
 function doSend(message) {
-    writeToSent("SENT: " + message);
+    writeTo(sent,"SENT: " + message);
     websocket.send(message);
 }
 
-function writeToScreen(message) {
-    output.innerHTML = message;
-}
-
-function writeToSent(message) {
-    sent.innerHTML = message;
-}
-
-function writeToReceived(message) {
-    received.innerHTML = message;
+function writeTo(id, message) {
+    id.innerHTML = message;
 }
 
 window.addEventListener("load", init, false);
