@@ -7,6 +7,13 @@ var output;
 document.onmousedown = mouseDown;
 document.onmouseup = mouseUp;
 
+function init() {
+    output   = document.getElementById("output");
+    sent     = document.getElementById("sent");
+    received = document.getElementById("received");
+    testWebSocket();
+}
+
 function mouseDown(event) {
     downX = event.clientX;
     downY = event.clientY;
@@ -16,11 +23,6 @@ function mouseUp(event) {
     var data = {"from": [downX, downY],
                 "to": [event.clientX, event.clientY] };
     doSend(JSON.stringify(data));
-}
-
-function init() {
-    output = document.getElementById("output");
-    testWebSocket();
 }
 
 function testWebSocket() {
@@ -33,19 +35,20 @@ function testWebSocket() {
 
 function onOpen(evt) {
     writeToScreen("CONNECTED");
-    doSend("please drag any place");
+    writeToSent("please drag any place");
+    writeToReceived("answer from LISP will appear here");
 }
 
-function onClick(evt) {
-    doSend("son of a bitch");
-}
+// function onClick(evt) {
+//     doSend("son of a bitch");
+// }
 
 function onClose(evt) {
     writeToScreen("DISCONNECTED");
 }
 
 function onMessage(evt) {
-    writeToScreen('<span style="color: blue;">MOUSE DRAGGED: ' + evt.data+'</span>');
+    writeToReceived('<span style="color: blue;">' + evt.data+'</span>');
 }
 
 function onError(evt) {
@@ -53,12 +56,20 @@ function onError(evt) {
 }
 
 function doSend(message) {
-    writeToScreen("SENT: " + message);
+    writeToSent("SENT: " + message);
     websocket.send(message);
 }
 
 function writeToScreen(message) {
     output.innerHTML = message;
+}
+
+function writeToSent(message) {
+    sent.innerHTML = message;
+}
+
+function writeToReceived(message) {
+    received.innerHTML = message;
 }
 
 window.addEventListener("load", init, false);

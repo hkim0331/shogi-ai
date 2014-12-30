@@ -42,6 +42,8 @@
     (:h1"DownUP")
     (:p "please mouse down and up at your favourite place.")
     (:div :id "output")
+    (:div :id "sent")
+    (:div :id "received")
     (:hr)
     (:p "programmed by hkimura.")))
 
@@ -93,7 +95,7 @@
 ;;   (broadcast room "~a says ~a" (name user) message))
 
 (defmethod hunchensocket:text-message-received ((route action) user message)
-  (unicast route "~a" message user))
+  (unicast route "LISP: ~a" message user))
 
 ;; Finally, start the server. `hunchensocket:websocket-acceptor` works
 ;; just like `hunchentoot:acceptor`, and you can probably also use
@@ -106,11 +108,3 @@
         (start (make-instance 'hunchensocket:websocket-acceptor :port port))))
 
 (start-websocket 8081)
-
-
-
-
-
-
-
-
