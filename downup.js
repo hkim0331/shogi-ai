@@ -44,11 +44,11 @@ function onClose(evt) {
 }
 
 function onMessage(evt) {
-    writeTo(received,'<span style="color: blue;">' + evt.data+'</span>');
+    writeTo(received, evt.data);
 }
 
 function onError(evt) {
-    writeTo(output,'<span style="color: red;">ERROR:</span> ' + evt.data);
+    writeTo(output,'ERROR: ' + evt.data);
 }
 
 function doSend(message) {

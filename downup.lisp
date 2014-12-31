@@ -1,14 +1,19 @@
-(ql:quickload '(cl-who hunchentoot hunchensocket))
+;; FIXME
+;; slime の C-c C-c で評価するとエラー
+;;(ql:quickload '(cl-who hunchentoot hunchensocket cl-json))
 
 (defpackage :downup
-  (:use :cl :cl-who :hunchentoot :hunchensocket))
+   (:use :cl :cl-who :hunchentoot :hunchensocket :cl-json))
 
 (in-package :downup)
+
+;;(ql:quickload '(cl-who hunchentoot hunchensocket cl-json))
 
 (defvar *acceptor* nil)
 
 (defun start-server (port)
-  (setf *acceptor* (start (make-instance 'easy-acceptor :port port))))
+  (setf *acceptor*
+        (start (make-instance 'easy-acceptor :port port))))
 
 (start-server 8080)
 
@@ -37,7 +42,7 @@
             (:body
              ,@body))))
 
-(define-easy-handler (downup :uri "/downup") ()
+(hunchentoot:define-easy-handler (downup :uri "/downup") ()
   (standard-page (:title "downup")
     (:h1"DownUP")
     (:p "please mouse down and up at your favourite place.")
@@ -47,7 +52,9 @@
     (:hr)
     (:p "programmed by hkimura.")))
 
+;;;
 ;;; websocket from huncheksocket/demo.lisp
+;;;
 
 (defclass action (hunchensocket:websocket-resource)
   ((name :initarg :name :reader name
@@ -95,7 +102,10 @@
 ;;   (broadcast room "~a says ~a" (name user) message))
 
 (defmethod hunchensocket:text-message-received ((route action) user message)
-  (unicast route "LISP: ~a" message user))
+  (unicast route "LISP: ~a" (parse message) user))
+
+(defun parse (json-string)
+  (json:decode-json-from-string json-string))
 
 ;; Finally, start the server. `hunchensocket:websocket-acceptor` works
 ;; just like `hunchentoot:acceptor`, and you can probably also use
@@ -105,6 +115,7 @@
 
 (defun start-websocket (port)
   (setf *websocket-acceptor*
-        (start (make-instance 'hunchensocket:websocket-acceptor :port port))))
+        (start (make-instance 'hunchensocket:websocket-acceptor
+                              :port port))))
 
 (start-websocket 8081)
