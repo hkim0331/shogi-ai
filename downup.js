@@ -1,8 +1,8 @@
-var downX;
-var downY;
-
 var wsUri = "ws://localhost:8081/downup";
 var output;
+
+var downX;
+var downY;
 
 document.onmousedown = mouseDown;
 document.onmouseup = mouseUp;
@@ -20,9 +20,11 @@ function mouseDown(event) {
 }
 
 function mouseUp(event) {
-    var data = {"from": [downX, downY],
-                "to": [event.clientX, event.clientY] };
+    var data = {"from":[downX, downY],
+                "to":[event.clientX, event.clientY]};
     doSend(JSON.stringify(data));
+    // こう書くとエラー。
+    // doSend(JSON.stringify({"from": [downX, downY], "to": [event.clientX, event.clientY]});
 }
 
 function testWebSocket() {

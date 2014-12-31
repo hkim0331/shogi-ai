@@ -1,6 +1,6 @@
 (defvar *aoi* "{\"name\": \"aoi\", \"year\":17}")
 (with-input-from-string
-    (s nil)
-  (json:decode-json s))
+    (s "nil")
+  (json:decode-json *aoi*))
 
-(json:decode-json-from-string *aoi*)
+(format nil "~a" (json:decode-json-from-string *aoi*)) 

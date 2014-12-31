@@ -109,7 +109,12 @@
 
 ;; FIXME: ここで将棋AIのプログラムををはさめばいい。
 (defun parse (json-string)
-  (json:decode-json-from-string json-string))
+  (let* ((coords (json:decode-json-from-string json-string))
+         (start (rest (first coords)))
+         (end (rest (second coords))))
+      (if (equal start end)
+      (format nil "double click at ~a" start)
+      (format nil "drag from ~a to ~a" start end))))
 
 ;; Finally, start the server. `hunchensocket:websocket-acceptor` works
 ;; just like `hunchentoot:acceptor`, and you can probably also use
