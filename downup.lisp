@@ -45,7 +45,10 @@
 (hunchentoot:define-easy-handler (downup :uri "/downup") ()
   (standard-page (:title "downup")
     (:h1"DownUP")
-    (:p "please mouse down and up at your favourite place.")
+    (:p "JavaScript でブラウザ上のドラッグを拾い、CommonLisp に WebSocket通信。")
+    (:p "イベントの座標は JavaScript 側では JSON.stringifyし、")
+    (:p "CommonLisp はそれを json:decode-json-from-string する。")
+    (:p "今はやりとりする座標を表示するだけ。")
     (:div :id "output")
     (:div :id "sent")
     (:div :id "received")
@@ -104,6 +107,7 @@
 (defmethod hunchensocket:text-message-received ((route action) user message)
   (unicast route "LISP: ~a" (parse message) user))
 
+;; FIXME: ここで将棋AIのプログラムををはさめばいい。
 (defun parse (json-string)
   (json:decode-json-from-string json-string))
 
