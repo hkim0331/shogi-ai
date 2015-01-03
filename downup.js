@@ -28,8 +28,8 @@ function mouseUp(event) {
 }
 
 function testWebSocket() {
-    websocket = new WebSocket(wsUri);
-    websocket.onopen = function(evt) { onOpen(evt) };
+    websocket         = new WebSocket(wsUri);
+    websocket.onopen  = function(evt) { onOpen(evt) };
     websocket.onclose = function(evt) { onClose(evt) };
     websocket.onmessage = function(evt) { onMessage(evt) };
     websocket.onerror = function(evt) { onError(evt) };
@@ -42,7 +42,7 @@ function onOpen(evt) {
 }
 
 function onClose(evt) {
-    writeTo(output,"DISCONNECTED");
+    writeTo(output, "DISCONNECTED");
 }
 
 function onMessage(evt) {
@@ -50,11 +50,11 @@ function onMessage(evt) {
 }
 
 function onError(evt) {
-    writeTo(output,'ERROR: ' + evt.data);
+    writeTo(output, "ERROR: " + evt.data);
 }
 
 function doSend(message) {
-    writeTo(sent,"SENT: " + message);
+    writeTo(sent, "SENT: " + message);
     websocket.send(message);
 }
 
