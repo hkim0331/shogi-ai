@@ -19,7 +19,7 @@
 
 (defun publish-static-content ()
     (push (create-static-file-dispatcher-and-handler
-         "/style.css" "downup.css") *dispatch-table*)
+         "/downup.css" "downup.css") *dispatch-table*)
     (push (create-static-file-dispatcher-and-handler
          "/downup.js" "downup.js") *dispatch-table*))
 
@@ -42,9 +42,9 @@
             (:body
              ,@body))))
 
-(hunchentoot:define-easy-handler (downup :uri "/downup") ()
+(define-easy-handler (downup :uri "/downup") ()
   (standard-page (:title "downup")
-    (:h1"DownUP")
+    (:h1 "DownUP")
     (:p "JavaScript でブラウザ上のドラッグを拾い、CommonLisp に WebSocket通信。")
     (:p "イベントの座標は JavaScript 側では JSON.stringifyし、")
     (:p "CommonLisp はそれを json:decode-json-from-string する。")
@@ -52,16 +52,46 @@
     (:div :id "output")
     (:div :id "sent")
     (:div :id "received")
+    (:p "link to " (:a :href "/page1" "another page"))
+    (:p "parameters by get? " (:a :href "/page2?x=1&y=2" "with get parameter"))
+    (:p (:form :action "/page3" :method "post"
+               (:p "x:" (:input :name "x"))
+               (:p "y:" (:input :name "y"))
+               (:p "z:" (:input :name "z"))
+               (:p (:input :type "submit"))))
     (:hr)
     (:p "programmed by hkimura.")))
 
+(define-easy-handler (page1 :uri "/page1") ()
+  (standard-page (:title "another page")
+    (:h1 "another page")
+    (:p "no params.")
+    (:p "back to " (:a :href "/downup" "downup"))
+    (:hr)
+    (:p "programmed by hkimura.")))
+
+(define-easy-handler (page2 :uri "/page2") (x y)
+  (standard-page (:title "parameters?")
+    (:h1 "Parameters passed by GET")
+    (:p (fmt "x:~d, y:~d" x y))
+    (:p "back to " (:a :href "/downup" "downup"))
+    (:hr)
+    (:p "programmed by hkimura.")))
+
+(define-easy-handler (page3 :uri "/page3") (x y z)
+  (standard-page (:title "parameters?")
+    (:h1 "Parameters passed by POST")
+    (:p (fmt "x:~d, y:~d, z:~d" x y z))
+    (:p "back to " (:a :href "/downup" "downup"))
+    (:hr)
+    (:p "programmed by hkimura.")))
 ;;;
 ;;; websocket from huncheksocket/demo.lisp
 ;;;
 
 (defclass action (hunchensocket:websocket-resource)
   ((name :initarg :name :reader name
-         :initform (error "Name this action!") ))
+         :initform (error "Name this action!")))
   (:default-initargs :client-class 'user))
 
 (defclass user (hunchensocket:websocket-client)
