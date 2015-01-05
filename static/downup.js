@@ -11,6 +11,10 @@ function init() {
     output   = document.getElementById("output");
     sent     = document.getElementById("sent");
     received = document.getElementById("received");
+    x      = document.getElementById("x");
+    y      = document.getElementById("y");
+    op     = document.getElementById("op");
+    z      = document.getElementById("z");
     testWebSocket();
 }
 
@@ -20,7 +24,8 @@ function mouseDown(event) {
 }
 
 function mouseUp(event) {
-    var data = {"from":[downX, downY],
+    var data = {"event":"mouse",
+                "from":[downX, downY],
                 "to":[event.clientX, event.clientY]};
     doSend(JSON.stringify(data));
     // こう書くとエラー。

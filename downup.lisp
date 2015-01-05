@@ -3,12 +3,16 @@
 ;; FIXME: slime の C-c C-k で評価するとエラー
 ;;(ql:quickload '(cl-who hunchentoot hunchensocket cl-json))
 
+;; バラして書いてみる。
+(ql:quickload :cl-who)
+(ql:quickload :cl-json)
+(ql:quickload :hunchentoot)
+(ql:quickload :hunchensocket)
+
 (defpackage :downup
-   (:use :cl :cl-who :hunchentoot :hunchensocket :cl-json))
+     (:use :cl :cl-who :cl-json :hunchentoot :hunchensocket))
 
 (in-package :downup)
-
-;;(ql:quickload '(cl-who hunchentoot hunchensocket cl-json))
 
 (defvar *acceptor* nil)
 
@@ -69,6 +73,16 @@
                   (:p "y:" (:input :name "y"))
                   (:p "z:" (:input :name "z"))
                   (:p (:input :type "submit"))))
+      (:li "ws action"
+           (:br)
+           (:input :id "x")
+           "+"
+           (:input :id "y")
+           (:input :id "op"
+                   :type :submit
+                   :value "="
+                   )
+           (:input :id "z"))
       )
      (:hr)
     (:p "programmed by hkimura.")))
@@ -151,13 +165,19 @@
   (unicast route "~a" (parse message) user))
 
 ;; FIXME: ここで将棋AIのプログラムををはさめばいい。
+(defun value (x) (rest x))
+
 (defun parse (json-string)
-  (let* ((coords (json:decode-json-from-string json-string))
-         (start (rest (first coords)))
-         (end (rest (second coords))))
-      (if (equal start end)
-      (format nil "double click at ~a" start)
-      (format nil "drag from ~a to ~a" start end))))
+  (let* ((data (json:decode-json-from-string json-string))
+         ;; FIXME
+         (type (value (first data)))
+         (arg1 (value (second data)))
+         (arg2 (value (third data))))
+    (if (string-equal "mouse" type)
+        (if (equal arg1 arg2)
+            (format nil "double click at ~a" arg1)
+            (format nil "drag from ~a to ~a" arg1 arg2))
+        (+ arg1 arg2))))
 
 ;; Finally, start the server. `hunchensocket:websocket-acceptor` works
 ;; just like `hunchentoot:acceptor`, and you can probably also use
@@ -174,7 +194,7 @@
   (stop *websocket-acceptor*)
   (stop *acceptor*))
 
-;; vm2014's apache uses 8080.
+;; vm2014's apache uses 80/tcp. so it's ok to use 8080 and 8081.
 (start-server 8080)
 (start-websocket 8081)
 
