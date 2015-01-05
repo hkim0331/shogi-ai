@@ -29,6 +29,8 @@
 ;; create-static-file-dispatcher-and-hander uri path
 (defun publish-static-content ()
   (push (create-static-file-dispatcher-and-handler
+         "/hello.html" "hello.html") *dispatch-table*)
+  (push (create-static-file-dispatcher-and-handler
          "/downup.css" "static/downup.css") *dispatch-table*)
   (push (create-static-file-dispatcher-and-handler
          "/downup.js" "static/downup.js") *dispatch-table*))
@@ -60,8 +62,8 @@
      (:p "CommonLisp はそれを json:decode-json-from-string する。")
      (:table
             (:tr (:th "status") (:td :id "output"))
-            (:tr (:th "js to cl") (:td :id "sent"))
-            (:tr (:th "cl to js") (:td :id "received")))
+            (:tr (:th "JS -> CL") (:td :id "sent"))
+            (:tr (:th "CL -> JS") (:td :id "received")))
      (:h2 "link test")
      (:ul
       (:li (:a :href "hello.html" "static page"))
@@ -162,9 +164,6 @@
 ;;     ((room chat-room) user message)
 ;;   (broadcast room "~a says ~a" (name user) message))
 
-(defmethod hunchensocket:text-message-received ((route action) user message)
-  (unicast route "~a" (parse message) user))
-
 ;; FIXME: ここで将棋AIのプログラムををはさめばいい。
 (defun value (x) (rest x))
 
@@ -176,9 +175,12 @@
          (arg2 (value (assoc :arg-2 data))))
     (if (string-equal "mouse" type)
         (if (equal arg1 arg2)
-            (format nil "double click at ~a" arg1)
+            (format nil "click at ~a" arg1)
             (format nil "drag from ~a to ~a" arg1 arg2))
         (+ arg1 arg2))))
+
+(defmethod hunchensocket:text-message-received ((route action) user message)
+  (unicast route "~a" (parse message) user))
 
 ;; Finally, start the server. `hunchensocket:websocket-acceptor` works
 ;; just like `hunchentoot:acceptor`, and you can probably also use
