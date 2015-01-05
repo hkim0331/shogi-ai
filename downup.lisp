@@ -1,5 +1,6 @@
-;; FIXME
-;; slime の C-c C-c で評価するとエラー
+;; -*- coding: utf-8 -*-
+;;
+;; FIXME: slime の C-c C-k で評価するとエラー
 ;;(ql:quickload '(cl-who hunchentoot hunchensocket cl-json))
 
 (defpackage :downup
@@ -11,17 +12,22 @@
 
 (defvar *acceptor* nil)
 
+;; OK define document-root here, but anywhere else?
+;; if define document-root, can not find css nor js file.
 (defun start-server (port)
   (setf *acceptor*
-        (start (make-instance 'easy-acceptor :port port))))
+        (start (make-instance 'easy-acceptor
+                              :port port
+                              ;; hello.html も見えない。
+                              ;;:document-root #P"/Users/hkim/bt/static/"
+                              ))))
 
-(start-server 8080)
-
+;; create-static-file-dispatcher-and-hander uri path
 (defun publish-static-content ()
-    (push (create-static-file-dispatcher-and-handler
-         "/downup.css" "downup.css") *dispatch-table*)
-    (push (create-static-file-dispatcher-and-handler
-         "/downup.js" "downup.js") *dispatch-table*))
+  (push (create-static-file-dispatcher-and-handler
+         "/downup.css" "static/downup.css") *dispatch-table*)
+  (push (create-static-file-dispatcher-and-handler
+         "/downup.js" "static/downup.js") *dispatch-table*))
 
 (publish-static-content)
 
@@ -36,7 +42,7 @@
              (:title ,title)
              (:link :type "text/css"
                     :rel  "stylesheet"
-                    :href "/style.css")
+                    :href "/downup.css")
              (:script :type "text/javascript"
                       :src  "/downup.js"))
             (:body
@@ -45,21 +51,26 @@
 (define-easy-handler (downup :uri "/downup") ()
   (standard-page (:title "downup")
     (:h1 "DownUP")
-    (:p "JavaScript でブラウザ上のドラッグを拾い、CommonLisp に WebSocket通信。")
-    (:p "イベントの座標は JavaScript 側では JSON.stringifyし、")
-    (:p "CommonLisp はそれを json:decode-json-from-string する。")
-    (:p "今はやりとりする座標を表示するだけ。")
-    (:div :id "output")
-    (:div :id "sent")
-    (:div :id "received")
-    (:p "link to " (:a :href "/page1" "another page"))
-    (:p "parameters by get? " (:a :href "/page2?x=1&y=2" "with get parameter"))
-    (:p (:form :action "/page3" :method "post"
-               (:p "x:" (:input :name "x"))
-               (:p "y:" (:input :name "y"))
-               (:p "z:" (:input :name "z"))
-               (:p (:input :type "submit"))))
-    (:hr)
+         (:p "JavaScript でブラウザ上のドラッグを拾い、CommonLisp に WebSocket通信。")
+     (:p "イベントの座標は JavaScript 側では JSON.stringifyし、")
+     (:p "CommonLisp はそれを json:decode-json-from-string する。")
+     (:table
+            (:tr (:th "status") (:td :id "output"))
+            (:tr (:th "js to cl") (:td :id "sent"))
+            (:tr (:th "cl to js") (:td :id "received")))
+     (:h2 "link test")
+     (:ul
+      (:li (:a :href "hello.html" "static page"))
+      (:li "link to " (:a :href "/page1" "another lisp hosted page"))
+      (:li "parameters by get? " (:a :href "/page2?x=1&y=2" "with get parameter"))
+      (:li "form test"
+           (:form :action "/page3" :method "post"
+                  (:p "x:" (:input :name "x"))
+                  (:p "y:" (:input :name "y"))
+                  (:p "z:" (:input :name "z"))
+                  (:p (:input :type "submit"))))
+      )
+     (:hr)
     (:p "programmed by hkimura.")))
 
 (define-easy-handler (page1 :uri "/page1") ()
@@ -73,6 +84,7 @@
 (define-easy-handler (page2 :uri "/page2") (x y)
   (standard-page (:title "parameters?")
     (:h1 "Parameters passed by GET")
+    (:p "see the uri above.")
     (:p (fmt "x:~d, y:~d" x y))
     (:p "back to " (:a :href "/downup" "downup"))
     (:hr)
@@ -106,7 +118,8 @@
 
 (defun find-action (request)
   (find (hunchentoot:script-name request)
-        *actions* :test #'string= :key #'name))
+        *actions*
+        :test #'string= :key #'name))
 
 (pushnew 'find-action hunchensocket:*websocket-dispatch-table*)
 
@@ -135,7 +148,7 @@
 ;;   (broadcast room "~a says ~a" (name user) message))
 
 (defmethod hunchensocket:text-message-received ((route action) user message)
-  (unicast route "LISP: ~a" (parse message) user))
+  (unicast route "~a" (parse message) user))
 
 ;; FIXME: ここで将棋AIのプログラムををはさめばいい。
 (defun parse (json-string)
@@ -157,4 +170,11 @@
         (start (make-instance 'hunchensocket:websocket-acceptor
                               :port port))))
 
+(defun halt ()
+  (stop *websocket-acceptor*)
+  (stop *acceptor*))
+
+;; vm2014's apache uses 8080.
+(start-server 8080)
 (start-websocket 8081)
+
