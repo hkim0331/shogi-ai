@@ -162,9 +162,6 @@
 ;;     ((room chat-room) user message)
 ;;   (broadcast room "~a says ~a" (name user) message))
 
-(defmethod hunchensocket:text-message-received ((route action) user message)
-  (unicast route "~a" (parse message) user))
-
 ;; FIXME: ここで将棋AIのプログラムををはさめばいい。
 (defun value (x) (rest x))
 
@@ -179,6 +176,9 @@
             (format nil "double click at ~a" arg1)
             (format nil "drag from ~a to ~a" arg1 arg2))
         (+ arg1 arg2))))
+
+(defmethod hunchensocket:text-message-received ((route action) user message)
+  (unicast route "~a" (parse message) user))
 
 ;; Finally, start the server. `hunchensocket:websocket-acceptor` works
 ;; just like `hunchentoot:acceptor`, and you can probably also use
