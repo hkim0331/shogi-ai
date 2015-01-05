@@ -24,12 +24,10 @@ function mouseDown(event) {
 }
 
 function mouseUp(event) {
-    var data = {"event":"mouse",
-                "from":[downX, downY],
-                "to":[event.clientX, event.clientY]};
+    var data = {"type":"mouse",
+                "arg1":[downX, downY],
+                "arg2":[event.clientX, event.clientY]};
     doSend(JSON.stringify(data));
-    // こう書くとエラー。
-    // doSend(JSON.stringify({"from": [downX, downY], "to": [event.clientX, event.clientY]});
 }
 
 function testWebSocket() {

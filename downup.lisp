@@ -128,6 +128,7 @@
 ;; `hunchensocket:*websocket-dispatch-table*` works just like
 ;; `hunchentoot:*dispatch-table*`, but for websocket specific resources.
 
+;; FIXME: calc を追加するとしたらここ。追加してどう呼ぶか？
 (defvar *actions* (list (make-instance 'action :name "/downup")))
 
 (defun find-action (request)
@@ -168,11 +169,11 @@
 (defun value (x) (rest x))
 
 (defun parse (json-string)
+  ;;FIXME: functionize
   (let* ((data (json:decode-json-from-string json-string))
-         ;; FIXME
-         (type (value (first data)))
-         (arg1 (value (second data)))
-         (arg2 (value (third data))))
+         (type (value (assoc :type data)))
+         (arg1 (value (assoc :arg-1 data)))
+         (arg2 (value (assoc :arg-2 data))))
     (if (string-equal "mouse" type)
         (if (equal arg1 arg2)
             (format nil "double click at ~a" arg1)
