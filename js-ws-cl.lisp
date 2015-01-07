@@ -65,7 +65,7 @@
          (:span :id "cl" " ")
          ))
     (:hr)
-    (:p "programmed by hkimura.")))
+    (:p "programmed by hkimura, 2015-01-08.")))
 
 ;;;
 ;;; websocket from huncheksocket/demo.lisp
