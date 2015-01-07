@@ -1,4 +1,4 @@
 test/
-downup.dx64fsl
-downup.fasl
+*.dx64fsl
+*.fasl
 
