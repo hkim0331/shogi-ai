@@ -29,8 +29,6 @@
 ;; create-static-file-dispatcher-and-hander uri path
 (defun publish-static-content ()
   (push (create-static-file-dispatcher-and-handler
-         "/hello.html" "hello.html") *dispatch-table*)
-  (push (create-static-file-dispatcher-and-handler
          "/downup.css" "static/downup.css") *dispatch-table*)
   (push (create-static-file-dispatcher-and-handler
          "/downup.js" "static/downup.js") *dispatch-table*))
