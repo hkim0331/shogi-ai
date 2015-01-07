@@ -46,8 +46,8 @@
   (standard-page (:title "js-ws-cl")
     (:h1 "Websocket Example")
     (:p "input に json データを入れて send すると、キーが x または y のものだけ"
-        "json フォーマットで返ってくる。"
-        )
+        "json フォーマットで返ってくる。")
+    (:hr)
     (:div
      (:p "STAT:" (:span :id "stat")))
     (:div
@@ -97,11 +97,11 @@
    (apply #'format nil message args)))
 
 ;;necessary?
-(defmethod hunchensocket:client-connected ((route resource) client)
-  (unicast route "~a has joined ~a" (name client) (name route)))
+;; (defmethod hunchensocket:client-connected ((route resource) client)
+;;   (unicast route "~a has joined ~a" (name client) (name route)))
 
-(defmethod hunchensocket:client-disconnected ((route resource) client)
-  (unicast route "~a has left ~a" (name client) (name route)))
+;; (defmethod hunchensocket:client-disconnected ((route resource) client)
+;;   (unicast route "~a has left ~a" (name client) (name route)))
 
 (defun value (x) (rest x))
 
@@ -109,12 +109,10 @@
   (let ((alist (json:decode-json-from-string json-string)))
     (encode-json-alist-to-string
      `(,(assoc :x alist) ,(assoc :y alist))
-     )
-    ))
+     )))
 
 (defmethod hunchensocket:text-message-received ((route resource) client message)
-    (unicast route "~a" (parse message) client)
-  )
+    (unicast route "~a" (parse message) client))
 
 (defvar *websocket-acceptor* nil)
 
