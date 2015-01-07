@@ -40,7 +40,10 @@
              (:link :type "text/css" :rel "stylesheet"
                     :href "/js-ws-cl.css")
              (:script :type "text/javascript" :src "/js-ws-cl.js"))
-            (:body ,@body))))
+            (:body
+             ,@body
+             (:hr)
+             (:p "programmed by hkimura, 2015-01-08.")))))
 
 (define-easy-handler (js-ws-cl :uri "/js-ws-cl") ()
   (standard-page (:title "js-ws-cl")
@@ -62,10 +65,8 @@
          (:button :id "send" :onClick "toCL()" "send")))
     (:div
      (:p "CL returns:"
-         (:span :id "cl" " ")
-         ))
-    (:hr)
-    (:p "programmed by hkimura, 2015-01-08.")))
+         (:span :id "cl" " ")))
+    ))
 
 ;;;
 ;;; websocket from huncheksocket/demo.lisp
