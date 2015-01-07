@@ -45,22 +45,27 @@
 (define-easy-handler (js-ws-cl :uri "/js-ws-cl") ()
   (standard-page (:title "js-ws-cl")
     (:h1 "Websocket Example")
+    (:p "input に json データを入れて send すると、キーが x または y のものだけ"
+        "json フォーマットで返ってくる。"
+        )
     (:div
      (:p "STAT:" (:span :id "stat")))
     (:div
      (:p "ERROR:" (:span :id "error")))
     (:div
-     (:p "JSON.stringify(\""
-         (:input :id :js :type "text" :size 40)
-         "\" )"
+     (:p "JSON.stringify("
+         (:input
+          :id :js
+          :type "text" :size 40
+          :value "{\"x\":4, \"y\":[1,2,3], \"doc\":\"only x, y returns\"}"
+          ) ")"
          (:button :id "send" :onClick "toCL()" "send")))
     (:div
      (:p "CL returns:"
          (:span :id "cl" " ")
          ))
     (:hr)
-    (:p "programmed by hkimura.")
-    ))
+    (:p "programmed by hkimura.")))
 
 ;;;
 ;;; websocket from huncheksocket/demo.lisp
@@ -103,12 +108,13 @@
 (defun parse (json-string)
   (let ((alist (json:decode-json-from-string json-string)))
     (encode-json-alist-to-string
-     `((:x ,(assoc :x alist))
-       (:y ,(assoc :y alist))))
+     `(,(assoc :x alist) ,(assoc :y alist))
+     )
     ))
 
 (defmethod hunchensocket:text-message-received ((route resource) client message)
-  (unicast route "~a" (parse message) client))
+    (unicast route "~a" (parse message) client)
+  )
 
 (defvar *websocket-acceptor* nil)
 
