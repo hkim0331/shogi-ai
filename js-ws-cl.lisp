@@ -13,19 +13,13 @@
 
 (defvar *acceptor* nil)
 
-;; OK define document-root here, but anywhere else?
-;; if define document-root, can not find css nor js file.
 (defun start-server (port)
   (setf *acceptor*
         (start (make-instance 'easy-acceptor
                               :port port
-                              ;; hello.html も見えない。
                               ;;:document-root #P"/Users/hkim/bt/static/"
                               ))))
 
-(start-server 8000)
-
-;; create-static-file-dispatcher-and-hander uri path
 (defun publish-static-content ()
   (push (create-static-file-dispatcher-and-handler
          "/js-ws-cl.css" "static/js-ws-cl.css") *dispatch-table*)
@@ -59,7 +53,7 @@
      (:p "JSON.stringify(\""
          (:input :id :js :type "text" :size 40)
          "\" )"
-         (:button :id "send" "send")))
+         (:button :id "send" :onClick "toCL()" "send")))
     (:div
      (:p "CL returns:"
          (:span :id "cl" " ")
@@ -127,6 +121,7 @@
   (stop *websocket-acceptor*)
   (stop *acceptor*))
 
-;; vm2014's apache uses 80/tcp. so it's ok to use 8080 and 8081.
+;;;
+(start-server 8000)
 (start-websocket 8001)
 

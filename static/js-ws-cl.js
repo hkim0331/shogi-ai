@@ -43,5 +43,17 @@ function writeTo(id, message) {
     id.innerHTML = message;
 }
 
+function toCL() {
+    var js;
+    var ret;
+
+    js = document.getElementById("JS").value;
+    if (confirm("send "+js+"?")) {
+        doSend(js);
+    }
+    alert("sent");
+}
+
 window.addEventListener("load", init, false);
+
 
