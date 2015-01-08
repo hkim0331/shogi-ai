@@ -48,8 +48,18 @@
 (define-easy-handler (js-ws-cl :uri "/js-ws-cl") ()
   (standard-page (:title "js-ws-cl")
     (:h1 "Websocket Example")
-    (:p "input に json データを入れて send すると、キーが x または y のものだけ"
-        "json フォーマットで返ってくる。")
+    (:ul
+     (:li "JSON.stringify に任意の JSON データを入れて send すると、
+それを受け取った CommonLisp が JSON データをパースし、
+キーが x または y のものだけの連想リストを作ったあと、
+そのリストを JSON に組み立て直し、返してくる。")
+     (:li "CommonLisp での処理をもっとはっきりさせるために、
+     現在時刻などを連想リストに入れてから戻すようにしたらどうか？")
+     (:li "STAT: が CONNECT にならないときはポートを確認。
+8000/tcp と 8001/tcp を使います。変更可。")
+     (:li "CL returns: の初期値はクライアントのブラウザ情報。（いらんか）")
+     (:li "現バージョンは JSON 以外のデータを入力するとエラー終了する。
+再読み込みで復活する。"))
     (:hr)
     (:div
      (:p "STAT:" (:span :id "stat")))
@@ -98,18 +108,20 @@
    (apply #'format nil message args)))
 
 ;;necessary?
-;; (defmethod hunchensocket:client-connected ((route resource) client)
-;;   (unicast route "~a has joined ~a" (name client) (name route)))
+(defmethod hunchensocket:client-connected ((route resource) client)
+  (unicast route "~a has joined ~a" (name client) (name route)))
 
-;; (defmethod hunchensocket:client-disconnected ((route resource) client)
-;;   (unicast route "~a has left ~a" (name client) (name route)))
+(defmethod hunchensocket:client-disconnected ((route resource) client)
+  (unicast route "~a has left ~a" (name client) (name route)))
 
-(defun value (x) (rest x))
+(let ((c 0))
+  (defun c-up () (incf c))
+  (defun c-reset () (setq c 0)))
 
 (defun parse (json-string)
   (let ((alist (json:decode-json-from-string json-string)))
     (encode-json-alist-to-string
-     `(,(assoc :x alist) ,(assoc :y alist))
+     `(,(assoc :x alist) ,(assoc :y alist) (:counter . ,(c-up)))
      )))
 
 (defmethod hunchensocket:text-message-received ((route resource) client message)
