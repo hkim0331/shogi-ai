@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+	<path stroke="black" stroke-width="1" fill="black" 
+		d="M 4 13 V 50 h 5 v -3 H 38 v 2 h 5 V 13 h -5 V 42 H 9 V 18 H 38 v -5 Z
+		M 9 34 Q 16 34 16 28 V 18 h 5 V 28 Q 21 40 12 40 h -1 L 9 38 Z 
+		M 38 36 Q 38 37 37 37 H 27 Q 25 37 25 35 V 18 h 5 V 32 H 34 Q 35 32 35 28 H 38 Z"/>
+
+</svg>

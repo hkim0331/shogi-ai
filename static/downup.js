@@ -1,4 +1,4 @@
-var wsUri = "ws://localhost:8081/downup";
+var wsUri = "ws://vm2014.local:8081/downup";
 var output;
 
 var downX;

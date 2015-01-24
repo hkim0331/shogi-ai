@@ -1,4 +1,4 @@
-var wsUri = "ws://localhost:8001/js-ws-cl";
+var wsUri = "ws://vm2014.local:8001/js-ws-cl";
 
 var stat;
 var js;

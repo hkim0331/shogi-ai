@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+	<path stroke="rgb(197,190,164)" stroke-width="1" fill="rgb(236,226,187)" 
+		d="M 10 5 L 50 5 L 45 45 L 30 50 L 15 45 Z"/>
+	<path stroke="rgb(197,190,164)" stroke-width="1" fill="rgb(199,158,103)"
+		d="M 15 45 L 30 50 L 45 45 L 44 51 L 30 56 L 16 51 Z"/>
+	<g transform="translate(42,40) scale(0.4) rotate(180)">
+	<path stroke="red" stroke-width="5" fill="none" 
+		d="M 20 5 L 25 33"/>
+
+	<path stroke="red" stroke-width="5" fill="none" 
+		d="M 50 20 Q -20 57 50 50 "/>
+
+	</g>
+
+</svg>

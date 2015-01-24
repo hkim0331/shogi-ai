@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+	<path stroke="black" stroke-width="1" fill="none" 
+		d="M 0 60 h 16"/>
+
+	<path stroke="black" stroke-width="1" fill="none" 
+		d="M 8 30 V 0"/>
+
+	<path stroke="black" stroke-width="1" fill="black" 
+		d="M 4 60 L 8 20 L 12 60"/>
+
+</svg>

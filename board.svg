@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 600 640">
+	<rect x="0" y="0" width="600" height="640" fill="rgb(222,193,91)"/>
+	<rect x="0" y="0" width="600" height="640" fill="rgb(222,193,91)"/>
+<path stroke-width="5" stroke="rgb(212,188,86)" fill="none" d="M 50 0 V 640 M 100 0 V 640 M 150 0 V 640 M 200 0 V 640 M 250 0 V 640 M 300 0 V 640 M 350 0 V 640 M 400 0 V 640 M 450 0 V 640 M 500 0 V 640 M 550 0 V 640 "/>
+<path stroke-width="5" stroke="rgb(217,188,86)" fill="none" d="M 30 0 V 640 M 80 0 V 640 M 130 0 V 640 M 180 0 V 640 M 230 0 V 640 M 280 0 V 640 M 330 0 V 640 M 380 0 V 640 M 430 0 V 640 M 480 0 V 640 M 530 0 V 640 M 580 0 V 640 "/>
+<path stroke-width="5" stroke="rgb(217,188,86)" fill="none" d="M 20 0 V 640 M 70 0 V 640 M 120 0 V 640 M 170 0 V 640 M 220 0 V 640 M 270 0 V 640 M 320 0 V 640 M 370 0 V 640 M 420 0 V 640 M 470 0 V 640 M 520 0 V 640 M 570 0 V 640 "/>
+<path stroke-width="5" stroke="rgb(217,188,86)" fill="none" d="M 10 0 V 640 M 60 0 V 640 M 110 0 V 640 M 160 0 V 640 M 210 0 V 640 M 260 0 V 640 M 310 0 V 640 M 360 0 V 640 M 410 0 V 640 M 460 0 V 640 M 510 0 V 640 M 560 0 V 640 "/>
+<circle cx="210" cy="224" r="4" stroke="black" stroke-width="1" fill="black"/>
+<circle cx="390" cy="224" r="4" stroke="black" stroke-width="1" fill="black"/>
+<circle cx="210" cy="416" r="4" stroke="black" stroke-width="1" fill="black"/>
+<circle cx="390" cy="416" r="4" stroke="black" stroke-width="1" fill="black"/>
+	<path stroke="black" stroke-width="3" fill="none" d="
+		M 30 32 v 576 h 540 v -576 Z"/>
+	<path stroke="black" stroke-width="1" fill="none" d="
+		M 90 32 v 576
+		M 150 32 v 576
+		M 210 32 v 576
+		M 270 32 v 576
+		M 330 32 v 576
+		M 390 32 v 576
+		M 450 32 v 576
+		M 510 32 v 576
+
+		M 30 96 h 540 
+		M 30 160 h 540 
+		M 30 224 h 540
+		M 30 288 h 540
+		M 30 352 h 540
+		M 30 416 h 540
+		M 30 480 h 540
+		M 30 544 h 540
+	"/>
+<!--
+<text x="52.5" y="25" dx="0,45,45,45,45,45,45,45,45" font-size="27" stroke="none" fill="black" text-anchor="start">987654321</text>
+<text x="572.5,572.5,572.5,572.5,572.5,572.5,572.5,572.5,572.5" y="74,138,202,266,330,394,458,522,586" font-size="25" stroke="none" fill="black" text-anchor="start">一二三四五六七八九</text>
+-->
+
+	<g transform="translate(534,3) scale(0.4)">
+	<path stroke="black" stroke-width="1" fill="black" 
+		d="M 5 15 v 5 h 6 V 49 h 5 V 10 h -4 Q 12 15 5 15 Z"/>
+
+	</g>
+
+	<g transform="translate(474,3) scale(0.4)">
+	<path stroke="black" stroke-width="1" fill="black" 
+		d="M 3 24 h 5 Q 8 15 13 15 Q 17 15 18 20 Q 18 25 11 32 Q 7 36 3 44 v 5 H 22 v -5 H 9 Q 12 39 16 35 Q 20 30 22 24 Q 23 10 13 10 Q 3 10 3 24 Z"/>
+
+	</g>
+	<g transform="translate(414,3) scale(0.4)">
+	<path stroke="black" stroke-width="1" fill="black" 
+		d="M 3 22 h 5 Q 8 15 13 15 Q 17 15 17 20 Q 17 26 10 26 v 5 Q 18 31 18 38 Q 18 45 13 45 Q 7 45 7 36 h -5 Q 2 49 13 49 Q 23 49 23 38 Q 23 29 18 29 Q 22 28 22 18 Q 22 10 13 10 Q 3 10 3 22 Z"/>
+
+	</g>
+	<g transform="translate(354,3) scale(0.4)">
+	<path stroke="black" stroke-width="1" fill="black" 
+		d="M 13 10 L 2 35 v 4 H 14 V 49 H 19 V 39 H 23 v -4 H 7 L 14 21 V 35 H 19 V 10 Z"/>
+
+	</g>
+	<g transform="translate(294,3) scale(0.4)">
+	<path stroke="black" stroke-width="1" fill="black" 
+		d="M 9 15 H 21 v -5 H 4 L 3 32 h 4 Q 7 28 12 28 Q 18 28 18 36 Q 18 45 13 45 Q 7 45 7 37 H 3 Q 3 49 13 49 Q 23 49 23 36 Q 23 24 14 24 Q 8 24 8 25 L 9 15 Z"/>
+
+	</g>
+	<g transform="translate(234,3) scale(0.4)">
+	<path stroke="black" stroke-width="1" fill="black" 
+		d="M 22 19 Q 22 10 14 10 Q 3 10 3 22 V 37 Q 3 49 13 49 Q 23 49 23 36 Q 23 23 14 23 Q 8 23 8 26 V 36 Q 8 28 13 28 Q 19 28 19 36 Q 19 44 13 44 Q 8 44 8 36 V 25 Q 8 15 13 15 Q 18 15 18 19 Z"/>
+
+	</g>
+	<g transform="translate(174,3) scale(0.4)">
+	<path stroke="black" stroke-width="1" fill="black" 
+		d="M 3 10 v 5 H 17 L 7 49 h 5 L 22 15 v -5 Z"/>
+
+	</g>
+	<g transform="translate(114,3) scale(0.4)">
+	<ellipse stroke="black" stroke-width="5" fill="none" 
+		cx="13" cy="20" rx="7" ry="7"/>
+
+	<ellipse stroke="black" stroke-width="5" fill="none" 
+		cx="13" cy="38" rx="9" ry="9"/>
+
+	</g>
+	<g transform="translate(54,3) scale(0.4)">
+	<path stroke="black" stroke-width="1" fill="black" 
+		d="M 4 40 Q 4 49 13 49 Q 23 49 23 36 V 21 Q 23 10 13 10 Q 3 10 3 23 Q 3 36 13 36 Q 18 36 18 34 V 25 Q 18 31 12 31 Q 7 31 7 23 Q 7 15 12 15 Q 18 15 12 15 Q 18 15 18 23 V 33 Q 18 44 13 44 Q 8 44 8 40 Z"/>
+
+	</g>
+
+	<g transform="translate(575,53) scale(0.4)">
+	<path stroke="black" stroke-width="1" fill="black" 
+		d="M 4 27 v 5 H 44 v -5 Z"/>
+
+	</g>
+	<g transform="translate(575,117) scale(0.4)">
+	<path stroke="black" stroke-width="1" fill="black" 
+		d="M 8 15 v 6 H 40 v -6 Z M 3 40 v 6 H 45 v -6 Z"/>
+
+	</g>
+	<g transform="translate(575,181) scale(0.4)">
+	<path stroke="black" stroke-width="1" fill="black" 
+		d="M 7 13 v 6 H 41 v -6 Z M 9 28 v 5 H 39 v -5 Z M 3 43 v 5 H 45 v -5 Z"/>
+
+	</g>
+	<g transform="translate(575,245) scale(0.4)">
+	<path stroke="black" stroke-width="1" fill="black" 
+		d="M 4 13 V 50 h 5 v -3 H 38 v 2 h 5 V 13 h -5 V 42 H 9 V 18 H 38 v -5 Z
+		M 9 34 Q 16 34 16 28 V 18 h 5 V 28 Q 21 40 12 40 h -1 L 9 38 Z 
+		M 38 36 Q 38 37 37 37 H 27 Q 25 37 25 35 V 18 h 5 V 32 H 34 Q 35 32 35 28 H 38 Z"/>
+
+	</g>
+	<g transform="translate(575,309) scale(0.4)">
+	<path stroke="black" stroke-width="1" fill="black" 
+		d="M 5 13 v 5 H 19 L 18 26 H 8 v 6 H 17 L 15 44 H 3 v 6 H 45 v -6 H 21 L 22 32 H 31 V 43 h 6 L 37 26 L 23 26 L 24 18 H 43 v -5 Z"/>
+
+	</g>
+	<g transform="translate(575,373) scale(0.4)">
+	<path stroke="black" stroke-width="1" fill="black" 
+		d="M 21 10 V 19 H 3 v 6 H 45 v -6 H 27 V 10 Z M 15 26 Q 12 38 2 47 L 6 52 Q 16 43 21 29 Z M 27 29 Q 32 42 42 50 L 46 45 Q 37 38 32 27 Z"/>
+
+	</g>
+	<g transform="translate(575,437) scale(0.4)">
+	<path stroke="black" stroke-width="1" fill="black" 
+		d="M 3 25 v 6 L 17 29 V 17 47 Q 17 50 19 50 H 39 Q 44 50 44 40 L 38 38 Q 38 44 36 44 H 22 V 28 L 44 25 v -6 L 22 22 V 10 h -5 V 23 Z"/>
+
+	</g>
+	<g transform="translate(575,501) scale(0.4)">
+	<path stroke="black" stroke-width="1" fill="black" 
+		d="M 15 12 Q 12 32 1 46 L 5 51 Q 16 39 21 14 Z M 27 13 Q 28 36 42 50 L 46 44 Q 34 36 32 12 Z"/>
+
+	</g>
+	<g transform="translate(575,565) scale(0.4)">
+	<path stroke="black" stroke-width="1" fill="black" 
+		d="M 7 20 v 6 H 18 Q 15 41 2 46 L 4 51 Q 19 46 23 26 H 30 L 29 47 Q 29 49 31 50 H 43 Q 46 50 46 40 L 41 39 Q 41 45 39 45 H 36 Q 34 45 34 44 L 35 20 H 23 V 10 h -5 V 20 Z"/>
+
+	</g>
+
+</svg>

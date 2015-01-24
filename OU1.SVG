@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<!-- <path stroke="rgb(204,204,204)" stroke-width="1" fill="none" d="M 2.5 60.5 L 4.5 62.5 L 59.5 62.5 L 59.5 56 L 52 9.5 L 51 8.5"/> -->
+<!-- <path stroke="rgb(140,140,140)" stroke-width="1" fill="none" d="M 2.5 60.5 L 3.5 61.5 L 58.5 61.5 L 58.5 55 L 51 8.5 L 50 7.5"/> -->
+	<path stroke="rgb(197,190,164)" stroke-width="1" fill="rgb(236,226,187)" 
+
+		d="M 30 0.5 L 10 7.5 L 2.5 55 L 57.5 55 L 50 7.5 Z"/>
+	<path stroke="rgb(197,190,164)" stroke-width="1" fill="rgb(199,158,103)"
+		d="M 2.5 55 L 57.5 55 L 57.5 60.5 L 2.5 60.5 Z"/>
+	<g transform="translate(16.2,13) scale(0.46)">
+	<path stroke="black" stroke-width="5" fill="none" 
+		d="M 7 19 L 52 19 M 30 19 L 30 59 M 10 37 L 50 37 M 5 59 L 55 59 M 37 42 L 42 48 L 46 53"/>
+
+
+	</g>
+
+</svg>

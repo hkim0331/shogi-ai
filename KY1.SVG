@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+	<path stroke="rgb(197,190,164)" stroke-width="1" fill="rgb(236,226,187)" 
+		d="M 30 4 L 14 9.5 L 8.5 51 L 51.5 51 L 46 9.5 Z"/>
+	<path stroke="rgb(197,190,164)" stroke-width="1" fill="rgb(199,158,103)"
+		d="M 8.5 51 L 51.5 51 L 51.5 57 L 8.5 57 Z"/>
+	<g transform="translate(17.7,15) scale(0.41)">
+	<path stroke="black" stroke-width="5" fill="none" 
+		d="M 9 18 L 48 15 M 6 25 L 54 25 M 30 16 L 30 40 M 30 27 L 3 42 M 30 27 L 57 42 M 17 42 L 17 66 
+		   M 17 45 L 45 45 L 45 66 M 17 53 L 45 53 M 17 62 L 45 62"/>
+
+	</g>
+
+</svg>

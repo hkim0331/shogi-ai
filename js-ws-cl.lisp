@@ -8,8 +8,9 @@
 
 (defpackage :js-ws-cl
   (:use :cl :cl-who :cl-json :hunchentoot :hunchensocket))
-
 (in-package :js-ws-cl)
+
+(load "conector.lisp")
 
 (defvar *acceptor* nil)
 
@@ -21,9 +22,11 @@
                               ))))
 
 (defun publish-static-content ()
-  (push (create-static-file-dispatcher-and-handler
-         "/js-ws-cl.css" "static/js-ws-cl.css") *dispatch-table*)
-  (push (create-static-file-dispatcher-and-handler
+    (push (create-static-file-dispatcher-and-handler
+           "/index.html" "index.html") *dispatch-table*)
+    (push (create-static-file-dispatcher-and-handler
+           "/js-ws-cl.css" "static/js-ws-cl.css") *dispatch-table*)
+    (push (create-static-file-dispatcher-and-handler
          "/js-ws-cl.js" "static/js-ws-cl.js") *dispatch-table*))
 
 (publish-static-content)
@@ -107,9 +110,12 @@
    (first (hunchensocket:clients route))
    (apply #'format nil message args)))
 
-;;necessary?
+;;FIXME.
+;;necessary.
 (defmethod hunchensocket:client-connected ((route resource) client)
-  (unicast route "~a has joined ~a" (name client) (name route)))
+  (initialize)
+  (unicast route "~a has joined ~a" (name client) (name route))
+  )
 
 (defmethod hunchensocket:client-disconnected ((route resource) client)
   (unicast route "~a has left ~a" (name client) (name route)))
@@ -118,11 +124,42 @@
   (defun c-up () (incf c))
   (defun c-reset () (setq c 0)))
 
+(defun value (x) (cdr x))
+;; (defun parse (json-string)
+;;   (let* ((data (json:decode-json-from-string json-string))
+;; 		 (type (value (assoc :type data)))
+;; 		 (from (value (assoc :from data)))
+;; 		 (to   (value (assoc :to   data)))
+;; 		 (name (value (assoc :name data)))
+;; 		 (prom (value (assoc :prom data))))
+;; 	(cond
+;; 	 ((equal type "init")
+;; 	  (when (= from 1)
+;; 		(encode-json-alist-to-string
+;; 		 `((:answer  . ,(updata (cpu)))
+;; 		   (:counter . ,(c-up))))))
+;; 	 ((equal type "move")
+;; 	  (updata (man (convert from) (convert to) prom name))
+;; 	  (let ((ans (updata (cpu))))
+;; 		(encode-json-alist-to-string
+;; 		 `((:answer  . ,ans)
+;; 		   (:counter . ,(c-up))))))))
+
 (defun parse (json-string)
-  (let ((alist (json:decode-json-from-string json-string)))
+  (let* ((data (json:decode-json-from-string json-string))
+         (type (value (assoc :type data)))
+         (from (value (assoc :from data)))
+         (to   (value (assoc :to   data)))
+         (name (value (assoc :name data)))
+         (prom (value (assoc :prom data))))
     (encode-json-alist-to-string
-     `(,(assoc :x alist) ,(assoc :y alist) (:counter . ,(c-up)))
-     )))
+     (cond
+       ((equal type "init")
+        (if (= from 1)
+            `((:answer  . ,(updata (cpu))) (:counter . ,(c-up)))
+            `((:answer . "intialized"))))
+       (t (updata (man (convert from) (convert to) prom name))
+          `((:answer  . ,(updata (cpu))) (:counter . ,(c-up))))))))
 
 (defmethod hunchensocket:text-message-received ((route resource) client message)
     (unicast route "~a" (parse message) client))
@@ -139,6 +176,6 @@
   (stop *acceptor*))
 
 ;;;
-(start-server 8000)
-(start-websocket 8001)
+(start-server 8880)
+(start-websocket 8881)
 

@@ -1,4 +1,6 @@
 test/
 *.dx64fsl
 *.fasl
+.AppleDouble
+.DS_Store
 

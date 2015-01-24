@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>shogi-AI</title>
+		<link rel="shortcut icon" href="shogi.ico">
+	</head>
+	<body>
+		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1220" height="640">
+				<script xlink:href="syougi1.js"></script>
+				<script xlink:href="syougi2.js"></script>
+				<script xlink:href="syougi3.js"></script>
+				<script xlink:href="websocket.js"></script>
+				<script xlink:href="addlog.js"></script>
+				<image x="310" y="0" width="600" height="640" xlink:href="board.svg" onmouseup="reset()" id="0"></image>
+				<image x="0" y="0" width="300" height="320" xlink:href="komaoki.svg" onmouseup="reset()"></image>
+				<image x="920" y="320" width="300" height="320" xlink:href="komaoki.svg" onmousedown="syougi(999)"></image>
+				<image x="340" y="160" width="60" height="64" xlink:href="FU2.SVG" id="293"></image>
+				<image x="400" y="160" width="60" height="64" xlink:href="FU2.SVG" id="283"></image>
+				<image x="460" y="160" width="60" height="64" xlink:href="FU2.SVG" id="273"></image>
+				<image x="520" y="160" width="60" height="64" xlink:href="FU2.SVG" id="263"></image>
+				<image x="580" y="160" width="60" height="64" xlink:href="FU2.SVG" id="253"></image>
+				<image x="640" y="160" width="60" height="64" xlink:href="FU2.SVG" id="243"></image>
+				<image x="700" y="160" width="60" height="64" xlink:href="FU2.SVG" id="233"></image>
+				<image x="760" y="160" width="60" height="64" xlink:href="FU2.SVG" id="223"></image>
+				<image x="820" y="160" width="60" height="64" xlink:href="FU2.SVG" id="213"></image>
+				<image x="340" y="416" width="60" height="64" xlink:href="FU1.SVG" id="97" onmousedown="syougi(97)"></image>
+				<image x="400" y="416" width="60" height="64" xlink:href="FU1.SVG" id="87" onmousedown="syougi(87)"></image>
+				<image x="460" y="416" width="60" height="64" xlink:href="FU1.SVG" id="77" onmousedown="syougi(77)"></image>
+				<image x="520" y="416" width="60" height="64" xlink:href="FU1.SVG" id="67" onmousedown="syougi(67)"></image>
+				<image x="580" y="416" width="60" height="64" xlink:href="FU1.SVG" id="57" onmousedown="syougi(57)"></image>
+				<image x="640" y="416" width="60" height="64" xlink:href="FU1.SVG" id="47" onmousedown="syougi(47)"></image>
+				<image x="700" y="416" width="60" height="64" xlink:href="FU1.SVG" id="37" onmousedown="syougi(37)"></image>
+				<image x="760" y="416" width="60" height="64" xlink:href="FU1.SVG" id="27" onmousedown="syougi(27)"></image>
+				<image x="820" y="416" width="60" height="64" xlink:href="FU1.SVG" id="17" onmousedown="syougi(17)"></image>
+				<image x="340" y="32" width="60" height="64" xlink:href="KY2.SVG" id="291"></image>
+				<image x="820" y="32" width="60" height="64" xlink:href="KY2.SVG" id="211"></image>
+				<image x="340" y="544" width="60" height="64" xlink:href="KY1.SVG" id="99" onmousedown="syougi(99)"></image>
+				<image x="820" y="544" width="60" height="64" xlink:href="KY1.SVG" id="19" onmousedown="syougi(19)"></image>
+				<image x="400" y="32" width="60" height="64" xlink:href="KE2.SVG" id="281"></image>
+				<image x="760" y="32" width="60" height="64" xlink:href="KE2.SVG" id="221"></image>
+				<image x="400" y="544" width="60" height="64" xlink:href="KE1.SVG" id="89" onmousedown="syougi(89)"></image>
+				<image x="760" y="544" width="60" height="64" xlink:href="KE1.SVG" id="29" onmousedown="syougi(29)"></image>
+				<image x="460" y="32" width="60" height="64" xlink:href="GI2.SVG" id="271"></image>
+				<image x="700" y="32" width="60" height="64" xlink:href="GI2.SVG" id="231"></image>
+				<image x="460" y="544" width="60" height="64" xlink:href="GI1.SVG" id="79" onmousedown="syougi(79)"></image>
+				<image x="700" y="544" width="60" height="64" xlink:href="GI1.SVG" id="39" onmousedown="syougi(39)"></image>
+				<image x="520" y="32" width="60" height="64" xlink:href="KI2.SVG" id="261"></image>
+				<image x="640" y="32" width="60" height="64" xlink:href="KI2.SVG" id="241"></image>
+				<image x="520" y="544" width="60" height="64" xlink:href="KI1.SVG" id="69" onmousedown="syougi(69)"></image>
+				<image x="640" y="544" width="60" height="64" xlink:href="KI1.SVG" id="49" onmousedown="syougi(49)"></image>
+				<image x="580" y="32" width="60" height="64" xlink:href="OU2.SVG" id="251" name="ou2"></image>
+				<image x="580" y="544" width="60" height="64" xlink:href="OU1.SVG" id="59" onmousedown="syougi(59)" name="ou1"></image>
+				<image x="400" y="96" width="60" height="64" xlink:href="HI2.SVG" id="282"></image>
+				<image x="760" y="480" width="60" height="64" xlink:href="HI1.SVG" id="28" onmousedown="syougi(28)"></image>
+				<image x="760" y="96" width="60" height="64" xlink:href="KA2.SVG" id="222"></image>
+				<image x="400" y="480" width="60" height="64" xlink:href="KA1.SVG" id="88" onmousedown="syougi(88)"></image>
+		</svg>
+        <div id="2"></div>
+	</body>
+</html>

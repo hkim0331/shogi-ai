@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<script xlink:href="tumesyougi.js"></script>
+<image x="0" y="0" width="600" height="640" xlink:href="board.svg" ></image>
+<image x="610" y="320" width="300" height="320" xlink:href="komaoki.svg"></image>
+<image x="510" y="32" width="60" height="64" xlink:href="KE2.SVG" id="35"></image>
+<image x="450" y="160" width="60" height="64" xlink:href="KI1.SVG" id="42"></image>
+</svg>

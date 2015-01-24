@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+	<path stroke="rgb(197,190,164)" stroke-width="1" fill="rgb(236,226,187)" 
+
+		d="M 30 1 L 11 8 L 4 54 L 56 54 L 49 8 Z"/>
+	<path stroke="rgb(197,190,164)" stroke-width="1" fill="rgb(199,158,103)"
+		d="M 4 54 L 56 54 L 56 60 L 4 60 Z"/>
+	<g transform="translate(16.5,15) scale(0.45)">
+	<path stroke="red" stroke-width="5" fill="none" 
+		d="M 17 11 L 17 18 M 4 19 L 30 19 M 11 21 L 13 27 M 23 20 L 21 27 M 3 29 L 31 29"/>
+
+	<path stroke="red" stroke-width="5" fill="none" 
+		d="M 9 66 L 9 37 L 25 37 L 25 63 L 18 63 M 9 45 L 25 45 M 9 53 L 25 53"/>
+
+	<path stroke="red" stroke-width="5" fill="none" 
+		d="M 36 19 L 56 19 M 36 11 L 36 26 L 51 26 L 51 34 L 36 34 L 36 55 Q 36 63 39 63 L 53 63 L 56 57 M 36 41 L 53 41 M 36 48 L 53 48 M 36 55 L 54 55"/>
+	</g>
+
+</svg>

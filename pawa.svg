@@ -1,0 +1,2 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><image x="0" y="32" width="60" height="64" xlink:href="FU1.SVG" id="47" onclick="syougi()"></image><image x="30" y="0" width="60" height="64" xlink:href="ka2.SVG" id="47" onclick="syougi()"></image>
+<audio src="sound.mp3" autoplay="true"></audio></svg>

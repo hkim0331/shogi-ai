@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+	<path stroke="red" stroke-width="5" fill="none" 
+		d="M 51 16 L 12 16 L 12 47 M 12 43 L 51 43 L 49 63 L 40 63"/>
+
+	<path stroke="red" stroke-width="5" fill="none" 
+		d="M 12 25 H 48 M 12 34 H 48 M 30 16 V 43 M 11 49 L 7 62 M 20 50 L 21 61 M 29 49 L 31 60 M 38 48 L 43 57"/>
+</svg>
