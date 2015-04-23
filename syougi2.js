@@ -30,6 +30,7 @@ function syougi2(newId, oldId) {
 	if (ifThereIsKoma(newId+opponentBaseId)) {
 		var opponentKoma = document.getElementById(newId + opponentBaseId).getAttribute('xlink:href');
 		if((opponentKoma.toUpperCase())=='OU2.SVG'){
+            gamesetFlag=true;
 			alert('you win');
 		}
 		opponentKoma = changeMotikomaNameByPlayer(opponentKoma, 1);

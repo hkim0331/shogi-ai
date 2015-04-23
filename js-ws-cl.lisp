@@ -1,5 +1,8 @@
 ;; -*- coding: utf-8 -*-
 ;; hiroshi.kimura.0331@gmail.com, 2015-01-07.
+;;
+;; modified 2015-04-23, document-root
+
 
 (ql:quickload :cl-who)
 (ql:quickload :cl-json)
@@ -16,10 +19,10 @@
 
 (defun start-server (port)
   (setf *acceptor*
-        (start (make-instance 'easy-acceptor
-                              :port port
-                              ;;:document-root #P"/Users/hkim/bt/static/"
-                              ))))
+        (start (make-instance
+                'easy-acceptor
+                :port port
+                :document-root #P"/Users/hkim/Desktop/shogi-ai/"))))
 
 (defun publish-static-content ()
     (push (create-static-file-dispatcher-and-handler
@@ -125,25 +128,6 @@
   (defun c-reset () (setq c 0)))
 
 (defun value (x) (cdr x))
-;; (defun parse (json-string)
-;;   (let* ((data (json:decode-json-from-string json-string))
-;; 		 (type (value (assoc :type data)))
-;; 		 (from (value (assoc :from data)))
-;; 		 (to   (value (assoc :to   data)))
-;; 		 (name (value (assoc :name data)))
-;; 		 (prom (value (assoc :prom data))))
-;; 	(cond
-;; 	 ((equal type "init")
-;; 	  (when (= from 1)
-;; 		(encode-json-alist-to-string
-;; 		 `((:answer  . ,(updata (cpu)))
-;; 		   (:counter . ,(c-up))))))
-;; 	 ((equal type "move")
-;; 	  (updata (man (convert from) (convert to) prom name))
-;; 	  (let ((ans (updata (cpu))))
-;; 		(encode-json-alist-to-string
-;; 		 `((:answer  . ,ans)
-;; 		   (:counter . ,(c-up))))))))
 
 (defun parse (json-string)
   (let* ((data (json:decode-json-from-string json-string))
@@ -176,6 +160,11 @@
   (stop *acceptor*))
 
 ;;;
-(start-server 8880)
-(start-websocket 8881)
+(defun main ()
+  (start-server 8880)
+  (start-websocket 8881)
+  ;; 起動を維持するために無限ループする
+  (loop (sleep 60)))
+
+(sb-ext:save-lisp-and-die "shogi-ai" :executable t :toplevel 'main)
 

@@ -1,17 +1,20 @@
 
 (defparameter *convert* 110)
 
-(defstruct p
-  name
-  place
-  prom
-  moves)
+;; (defstruct p
+;;   name
+;;   place
+;;   prom
+;;   moves)
 
-(defstruct data
-  board
-  hand
-  king
-  rows)
+;; (defstruct data
+;;   board
+;;   hand
+;;   king
+;;   rows)
+
+;; (defstruct value
+;;   pawn spear knight silver gold rook bishop king)
 
 (proclaim '(inline subst2 remove2 mappend))
 

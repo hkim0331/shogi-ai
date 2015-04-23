@@ -1,6 +1,6 @@
 
-(defstruct value
-  pawn spear knight silver gold rook bishop king)
+;; (defstruct value
+;;   pawn spear knight silver gold rook bishop king)
 
 (proclaim '(inline sum-of name->value value-name value-place))
 

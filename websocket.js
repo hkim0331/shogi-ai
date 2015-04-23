@@ -1,6 +1,8 @@
-// ˆÚ“®‚Å‚«‚éêŠ‚ğ‘I‘ğŒã‚Éî•ñ‚ğ‘—M
+// ç§»å‹•ã§ãã‚‹å ´æ‰€ã‚’é¸æŠå¾Œã«æƒ…å ±ã‚’é€ä¿¡
 window.onload = function () {
-	ws = new WebSocket('ws://vm2014.melt.kyutech.ac.jp:8881/js-ws-cl');
+    var host = location.host;
+    var sliceHost = host.substr(0,host.length - 5);
+    ws = new WebSocket('ws://'+sliceHost+':8881/js-ws-cl');
 	ws.onopen = function () { console.log('connect');setWSflag();selectSenkou();};
 	ws.onmessage = function (event) { movePlayer2Koma(event); };
 	window.onunload = function () { closeWS(); };
@@ -51,9 +53,9 @@ function renewKoma(id) {
 	SVGappendChildByElement(image);
 }
 
-// player2‚Ì‹î‚ğ“®‚©‚·
+// player2ã®é§’ã‚’å‹•ã‹ã™
 function movePlayer2Koma(event) {
-    //FIXME: data ‚¶‚á‚È‚¯‚ê‚Î return
+    //FIXME: data ã˜ã‚ƒãªã‘ã‚Œã° return
     console.log(event.data);
     var obj = JSON.parse(event.data);
     var ary = obj.answer;
@@ -73,18 +75,21 @@ console.log(mArray);
 	setTimeout(function(){appendKomaToId(putKoma.toUpperCase(), moveId + 200);},2000);
 
     if (ifThereIsKoma(moveId)) {
+        if(document.getElementById(moveId).getAttribute('xlink:href')=='OU1.SVG'){
+            gamesetFlag=true;
+            setTimeout(function(){alert('you lose')},2000);
+        }
 		setTimeout(function(){removeKoma(2,moveId);},2000);
     }
     setTimeout(function () { addlog(mArray[0] * 10 + mArray[1], moveId, putKoma); }, 2000);
     setTimeout(function () { resetTurnflag(); }, 2000);
-    setTimeout(function (moveId) { checkOu(moveId); }, 2001);
 }
 
 function checkOu(newId){
 	if (ifThereIsKoma(newId)) {
 		var opponentKoma = document.getElementById(newId).getAttribute('xlink:href');
-		if((opponentKoma.toUpperCase())=='OU2.SVG'){
-			alert('you lose');
+		if((opponentKoma.toUpperCase())=='OU1.SVG'){
+			setTimeout(function(){alert('you lose');},1500)
 		}
 	}
 }
@@ -113,7 +118,7 @@ function getKomaNameById(id) {
     return getKomaNameByFilename(getKomaFilenameById(id));
 }
 
-// id‚ÌˆÊ’u‚É‹î‚ğ’Ç‰Á
+// idã®ä½ç½®ã«é§’ã‚’è¿½åŠ 
 function appendKomaToId(komaName,id){
 	var x = getXById(id);
 	var y = getYById(id);
@@ -121,7 +126,7 @@ function appendKomaToId(komaName,id){
 	SVGappendChildByElement(image);
 }
 
-// ‚Æ‚Á‚½‹î‚ğplayer‚Ì‹î‚É’Ç‰Á
+// ã¨ã£ãŸé§’ã‚’playerã®æŒé§’ã«è¿½åŠ 
 function appendPlayerMotikomaByOpponentKomaId(player, opponentKomaId) {
     var removeKomaName = getKomaNameById(opponentKomaId).toUpperCase();
 	var motikomaName = changeMotikomaNameByPlayer(removeKomaName,player);
@@ -129,7 +134,7 @@ function appendPlayerMotikomaByOpponentKomaId(player, opponentKomaId) {
 
 }
 
-// ˆÚ“®‚µ‚½Œã‚Ì‹î‚ğæ“¾
+// ç§»å‹•ã—ãŸå¾Œã®é§’ã‚’å–å¾—
 function getPutKoma(movekoma,nariflag){
 	if(nariflag=='n'){
 		return movekoma+'2';
@@ -138,7 +143,7 @@ function getPutKoma(movekoma,nariflag){
 	}
 }
 
-// ‹î‚Ì–¼‘O‚ğƒvƒŒƒCƒ„[‚É‚æ‚Á‚Ä•Ï‚¦‚é
+// é§’ã®åå‰ã‚’ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ã‚ˆã£ã¦å¤‰ãˆã‚‹
 function changeMotikomaNameByPlayer(koma,player){
 	if(koma.substr(0,1)=='-'){
 		return koma.substr(1,2)+player;
@@ -147,7 +152,7 @@ function changeMotikomaNameByPlayer(koma,player){
 	}
 }
 
-// —á:ufu1.svgv‚©‚çufu1v‚ğæ“¾
+// ä¾‹:ã€Œfu1.svgã€ã‹ã‚‰ã€Œfu1ã€ã‚’å–å¾—
 function getKomaNameByFilename(Fname){
 	if(Fname.substr(0,1)=='-'){
 		return Fname.substr(0,4);
@@ -156,7 +161,7 @@ function getKomaNameByFilename(Fname){
 	}
 }
 
-// player‚Ì‹î‚Ì‹óid‚ğæ“¾
+// playerã®æŒé§’ã®ç©ºidã‚’å–å¾—
 function getEmptyMotikomaIdByPlayer(player){
 	if(player==1){
 		var cmpId = 301;
@@ -171,7 +176,7 @@ function getEmptyMotikomaIdByPlayer(player){
 	}
 }
 
-// id‚Ì—v‘f‚ğíœ
+// idã®è¦ç´ ã‚’å‰Šé™¤
 function removeById(id){
 	var element = document.getElementById(id);
 	if (!(element == undefined)) {
@@ -179,7 +184,7 @@ function removeById(id){
 	}
 }
 
-// id‚©‚ç‹î‚ÌxˆÊ’u‚ğæ“¾
+// idã‹ã‚‰é§’ã®xä½ç½®ã‚’å–å¾—
 function getXById(id){
 	if(id<100){
 		return 880-Math.floor(id/10)*60;
@@ -192,7 +197,7 @@ function getXById(id){
 	}
 }
 
-// id‚©‚ç‹î‚ÌyˆÊ’u‚ğæ“¾
+// idã‹ã‚‰é§’ã®yä½ç½®ã‚’å–å¾—
 function getYById(id){
 	if(id<100){
 		return (id%10)*64-32;
@@ -205,7 +210,7 @@ function getYById(id){
 	}
 }
 
-// ‹î‚Ì–¼‘O‚©‚çƒvƒŒƒCƒ„[–¼‚ğæ“¾
+// é§’ã®åå‰ã‹ã‚‰ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼åã‚’å–å¾—
 function getPlayerByKomaName(komaName){
 	if(komaName.substr(0,1)=='-'){
 		return komaName.substr(3,1)-0;
@@ -214,7 +219,7 @@ function getPlayerByKomaName(komaName){
 	}
 }
 
-// x,y,id,komaName‚©‚çimage—v‘f‚ğì¬
+// x,y,id,komaNameã‹ã‚‰imageè¦ç´ ã‚’ä½œæˆ
 function createImageElement(x,y,id,komaName){
 	var image = document.createElementNS('http://www.w3.org/2000/svg','image');
 	image.setAttributeNS(null,'x',x);
@@ -251,13 +256,13 @@ function createAnimateYElement(fromY,toY){
 	return (animate);
 }
 
-// svg‚É—v‘f‚ğ’Ç‰Á
+// svgã«è¦ç´ ã‚’è¿½åŠ 
 function SVGappendChildByElement(element){
 	var objBody = document.getElementsByTagName('svg').item(0);
 	return objBody.appendChild(element);
 }
 
-// id‚ÌˆÊ’u‚É‹î‚ª‚ ‚é‚©
+// idã®ä½ç½®ã«é§’ãŒã‚ã‚‹ã‹
 function ifThereIsKoma(id){
 	if(document.getElementById(id)){
 		return true;
@@ -274,7 +279,7 @@ function jsflagToLispflag(flag){
 	}
 }
 
-// websocket‚ğg‚¢ƒƒbƒZ[ƒW‚ğ‘—M
+// websocketã‚’ä½¿ã„ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é€ä¿¡
 function sendMessage(type, from, to, komaFilename, naruflag) {
     if (!(komaFilename==null)) {
 	var komaName = getKomaNameByFilename(komaFilename);
@@ -285,6 +290,7 @@ function sendMessage(type, from, to, komaFilename, naruflag) {
 	from=0;
     }
     if(komaName.substr(0,1)=='-'){
+        naruflag=true;
         komaName=komaName.substr(1,2);
     }
     var naru = jsflagToLispflag(naruflag);
@@ -305,13 +311,13 @@ function sendMessage(type, from, to, komaFilename, naruflag) {
 
 
 
-// Ú‘±ƒtƒ‰ƒO‚ğtrue‚É
+// æ¥ç¶šãƒ•ãƒ©ã‚°ã‚’trueã«
 function setWSflag() {
     var wsflagElement = document.getElementById(2);
     wsflagElement.setAttribute('id', 3);
 }
 
-// ws‚ğ•Â‚¶‚é
+// wsã‚’é–‰ã˜ã‚‹
 function closeWS() {
 	if(ws)ws.close();
 }

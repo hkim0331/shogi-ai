@@ -1,17 +1,18 @@
 function syougi3(num) {
+    if(gamesetFlag==true){return;}
 	moveFlag = true;
 	moveId = num;
 	document.getElementById(num).setAttribute('onmouseup', 'add(' + num + ')');
 	if (ifAlreadyClicked() || (num == 999)) {
 		removeCanMoveImage();
-	} else if (id == 'undefined') {
+    } else if (id == 'undefined') {
 	} else if (! ifConectWsServer()) {
 		alert("-Not conection server.\n-Please wait...");
 	} else if (ifPlayer2Turn()) {
 		alert("-Not your turn.\n-Please wait...");
 	} else {
 		var n=0,id=100,oou=0;
-		var koma = document.getElementById(num).getAttribute('xlink:href').toUpperCase(); 
+		var koma = document.getElementById(num).getAttribute('xlink:href').toUpperCase();
 		for(var i=11;i<100;i++){
 			if((koma=='FU1.SVG')&&(document.getElementById(199+i))){
 				oou=document.getElementById(199+i).getAttribute('xlink:href').toUpperCase();

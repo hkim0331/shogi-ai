@@ -1,7 +1,8 @@
 document.onmouseup = reset;
 document.onmousemove = move;
 moveFlag = false;
-moveId = undefined;
+moveId = 10000;
+gamesetFlag=false;
 
 function reset() {
 	moveFlag = false;
@@ -16,8 +17,9 @@ function reset() {
 
 function move() {
 	if (moveFlag == true) {
-		document.getElementById(moveId).setAttribute('x', event.x-40);
-		document.getElementById(moveId).setAttribute('y', event.y - 37);
+        var svgPointObj = document.getElementsByTagName('svg').item(0).getBoundingClientRect();
+		document.getElementById(moveId).setAttribute('x', event.x-30-svgPointObj.left);
+		document.getElementById(moveId).setAttribute('y', event.y - 32-svgPointObj.top);
 	}
 }
 
@@ -33,6 +35,9 @@ function add(id) {
 
 // 動かす駒をクリックしてから移動できる場所を表示するまで
 function syougi(id) {
+    if(gamesetFlag==true){
+        return;
+    }
 	if (id == 'undefined') {
 	}else if(! ifConectWsServer()){
 		alert("-Not conection server.\n-Please wait...");
@@ -367,19 +372,22 @@ function checkAndAppend(destinationId, num, cangosvgId) {
 	}
 }
 
-function checkHaveOu(player){
-	if(player == 1){
-		var id = document.getElementByName('ou1').item(0).getAttribute('id')
-		if(id>100){
-			alert('you lose');
-		}
-	}else{
-		var id = document.getElementByName('ou2').item(0).getAttribute('id')
-		if(id>300){
-			alert('you win');
-		}
-	}
-}
+// function checkHaveOu(player){
+// 	if(player == 1){
+//         var idElement=document.getElementsByName('ou1').item(0);
+//         if(idElement != null){
+// 		    var id = document.getElementsByName('ou1').item(0).getAttribute('id')
+//         }
+// 		if((id>100)||(id==null)){
+// 			alert('you lose');
+// 		}
+// 	}else{
+// 		var id = document.getElementsByName('ou2').item(0).getAttribute('id')
+// 		if((id>300)||(id==null)){
+// 			alert('you win');
+// 		}
+// 	}
+// }
 
 // id list
 /*-----------------------------------
