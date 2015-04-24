@@ -1,6 +1,4 @@
-PORT = 8888
-
-shogi-ai: js-ws-cl.lisp
+shogi-ai: shogi-ai.lisp
 	sbcl --load $<
 
 start: shogi-ai

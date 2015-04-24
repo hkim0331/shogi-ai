@@ -1,0 +1,33 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          shogi-ai
+# Required-Start:
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: shogi-ai 
+# Description:       pbl 2014 products shogi player.
+### END INIT INFO
+#
+
+USER="hkim"
+CMD="/opt/shogi-ai/shogi-ai"
+
+usage() {
+    echo "Usage: $0 {start|stop}"
+}
+
+case "$1" in
+    start)
+        start-stop-daemon --start --chuid $USER --background \
+            --exec ${CMD} || true
+        ;;
+    stop)
+        kill `ps ax | grep [s]hogi-ai | awk '{print $1}'`
+        ;;
+    *)
+        usage
+        ;;
+esac
+
+:
