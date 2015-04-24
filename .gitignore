@@ -3,4 +3,5 @@ test/
 *.fasl
 .AppleDouble
 .DS_Store
+shogi-ai
 

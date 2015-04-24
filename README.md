@@ -1,4 +1,36 @@
-# downup
+# shogi-ai
+
+## INSTALL
+
+このフォルダのコピー先を js-ws-cl.lisp の :document-root に指定すること。
+
+````lisp
+(defun start-server (port)
+  (setf *acceptor*
+        (start (make-instance
+                'easy-acceptor
+                :port port
+                :document-root #P"/Users/hkim/Desktop/shogi-ai/"))))
+````
+
+あとは
+
+````
+$ make
+$ make start
+````
+
+で起動。ブラウザから http://localhost:8880 でつながる。終了は、
+
+````
+$ make stop
+````
+
+----
+このプログラムの元は、common lisp で websocket の実験をするための js-ws-cl.lisp だった。
+そのファイル名がそのまま残っている。
+
+# was downup
 
 JavaScript/CommonLisp の hunchentoot/hunchensocket を使用した
 WebSocket 通信プログラムサンプル。

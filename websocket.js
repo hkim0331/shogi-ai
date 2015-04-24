@@ -1,65 +1,76 @@
-// ˆÚ“®‚Å‚«‚éêŠ‚ğ‘I‘ğŒã‚Éî•ñ‚ğ‘—M
+// ç§»å‹•ã§ãã‚‹å ´æ‰€ã‚’é¸æŠå¾Œã«æƒ…å ±ã‚’é€ä¿¡
 window.onload = function () {
-	ws = new WebSocket('ws://vm2014.melt.kyutech.ac.jp:8881/js-ws-cl');
-	ws.onopen = function () { console.log('connect');setWSflag();selectSenkou();};
-	ws.onmessage = function (event) { movePlayer2Koma(event); };
-	window.onunload = function () { closeWS(); };
+    //BUG
+    //var host = location.host;
+    //var sliceHost = host.substr(0,host.length - 5);
+    //
+    uri = 'ws://'+location.host+':20141/shogi-ai';
+    //
+    //alert(uri);
+    ws = new WebSocket(uri);
+    ws.onopen = function () {
+        console.log('connect');
+        setWSflag();
+        selectSenkou();
+    };
+    ws.onmessage = function (event) { movePlayer2Koma(event); };
+    window.onunload = function () { closeWS(); };
     ws.onclose=function(){console.log(4);};
-ws.onerror=function(error){console.log(error);};
-	appendAddIcon();
+    ws.onerror=function(error){console.log(error);};
+    appendAddIcon();
 }
 
 function selectSenkou(){
-	var flg = confirm('you first?');
-	if(flg){
-		sendMessage('init',0);
-	}else{
-		setTurnFlg();
-		sendMessage('init',1);
-	}
+    var flg = confirm('you first?');
+    if(flg){
+	sendMessage('init',0);
+    }else{
+	setTurnFlg();
+	sendMessage('init',1);
+    }
 }
 
 function removeKoma(player,moveId){
-        appendPlayerMotikomaByOpponentKomaId(player, moveId);
-        removeById(moveId);
+    appendPlayerMotikomaByOpponentKomaId(player, moveId);
+    removeById(moveId);
 }
 
 function appendAnimateElement(fromId,toId){
-	var animateX = createAnimateXElement(getXById(fromId),getXById(toId));
-	var animateY = createAnimateYElement(getYById(fromId),getYById(toId));
-	var target = document.getElementById(fromId);
-	target.appendChild(animateX);
-	target.appendChild(animateY);
+    var animateX = createAnimateXElement(getXById(fromId),getXById(toId));
+    var animateY = createAnimateYElement(getYById(fromId),getYById(toId));
+    var target = document.getElementById(fromId);
+    target.appendChild(animateX);
+    target.appendChild(animateY);
 }
 
 function startAnimation(fromId) {
-	var animateElements = document.getElementById(fromId).getElementsByTagName('animate');
-	animateElements.item(0).beginElement();
-	animateElements.item(1).beginElement();
+    var animateElements = document.getElementById(fromId).getElementsByTagName('animate');
+    animateElements.item(0).beginElement();
+    animateElements.item(1).beginElement();
 }
 
 function getJsFlagByLispFlag(flag){
-	if (flag == 't') {
-		return true;
-	} else {
-		return false
-	}
+    if (flag == 't') {
+	return true;
+    } else {
+	return false
+    }
 }
 
 function renewKoma(id) {
-	var image = document.getElementById(id);
-	SVGappendChildByElement(image);
+    var image = document.getElementById(id);
+    SVGappendChildByElement(image);
 }
 
-// player2‚Ì‹î‚ğ“®‚©‚·
+// player2ã®é§’ã‚’å‹•ã‹ã™
 function movePlayer2Koma(event) {
-    //FIXME: data ‚¶‚á‚È‚¯‚ê‚Î return
+    //FIXME: data ã˜ã‚ƒãªã‘ã‚Œã° return
     console.log(event.data);
     var obj = JSON.parse(event.data);
     var ary = obj.answer;
     if ((typeof(ary)=='string')||(ary == null)) return;
     var mArray = ary;
-console.log(mArray);
+    console.log(mArray);
     var oldKomaPlayer2Id = getOldPlayer2KomaId(mArray[0] * 10 + mArray[1], mArray[2]);
     var newKomaX = mArray[3];
     var newKomaY = mArray[4];
@@ -69,24 +80,27 @@ console.log(mArray);
     renewKoma(oldKomaPlayer2Id);
     appendAnimateElement(oldKomaPlayer2Id, moveId);
     startAnimation(oldKomaPlayer2Id);
-	setTimeout(function(){removeById(oldKomaPlayer2Id);},2000);
-	setTimeout(function(){appendKomaToId(putKoma.toUpperCase(), moveId + 200);},2000);
+    setTimeout(function(){removeById(oldKomaPlayer2Id);},2000);
+    setTimeout(function(){appendKomaToId(putKoma.toUpperCase(), moveId + 200);},2000);
 
     if (ifThereIsKoma(moveId)) {
-		setTimeout(function(){removeKoma(2,moveId);},2000);
+        if(document.getElementById(moveId).getAttribute('xlink:href')=='OU1.SVG'){
+            gamesetFlag=true;
+            setTimeout(function(){alert('you lose')},2000);
+        }
+	setTimeout(function(){removeKoma(2,moveId);},2000);
     }
     setTimeout(function () { addlog(mArray[0] * 10 + mArray[1], moveId, putKoma); }, 2000);
     setTimeout(function () { resetTurnflag(); }, 2000);
-    setTimeout(function (moveId) { checkOu(moveId); }, 2001);
 }
 
 function checkOu(newId){
-	if (ifThereIsKoma(newId)) {
-		var opponentKoma = document.getElementById(newId).getAttribute('xlink:href');
-		if((opponentKoma.toUpperCase())=='OU2.SVG'){
-			alert('you lose');
-		}
+    if (ifThereIsKoma(newId)) {
+	var opponentKoma = document.getElementById(newId).getAttribute('xlink:href');
+	if((opponentKoma.toUpperCase())=='OU1.SVG'){
+	    setTimeout(function(){alert('you lose');},1500)
 	}
+    }
 }
 
 // 
@@ -108,173 +122,173 @@ function getOldPlayer2KomaId(id,koma){
 function getKomaFilenameById(id) {
     return document.getElementById(id).getAttribute('xlink:href').toLowerCase();
 }
- 
+
 function getKomaNameById(id) {
     return getKomaNameByFilename(getKomaFilenameById(id));
 }
 
-// id‚ÌˆÊ’u‚É‹î‚ğ’Ç‰Á
+// idã®ä½ç½®ã«é§’ã‚’è¿½åŠ 
 function appendKomaToId(komaName,id){
-	var x = getXById(id);
-	var y = getYById(id);
-	var image = createImageElement(x,y,id,komaName);
-	SVGappendChildByElement(image);
+    var x = getXById(id);
+    var y = getYById(id);
+    var image = createImageElement(x,y,id,komaName);
+    SVGappendChildByElement(image);
 }
 
-// ‚Æ‚Á‚½‹î‚ğplayer‚Ì‹î‚É’Ç‰Á
+// ã¨ã£ãŸé§’ã‚’playerã®æŒé§’ã«è¿½åŠ 
 function appendPlayerMotikomaByOpponentKomaId(player, opponentKomaId) {
     var removeKomaName = getKomaNameById(opponentKomaId).toUpperCase();
-	var motikomaName = changeMotikomaNameByPlayer(removeKomaName,player);
-	appendKomaToId(motikomaName,getEmptyMotikomaIdByPlayer(player));
+    var motikomaName = changeMotikomaNameByPlayer(removeKomaName,player);
+    appendKomaToId(motikomaName,getEmptyMotikomaIdByPlayer(player));
 
 }
 
-// ˆÚ“®‚µ‚½Œã‚Ì‹î‚ğæ“¾
+// ç§»å‹•ã—ãŸå¾Œã®é§’ã‚’å–å¾—
 function getPutKoma(movekoma,nariflag){
-	if(nariflag=='n'){
-		return movekoma+'2';
-	}else{
-		return '-'+movekoma+'2';
-	}
+    if(nariflag=='n'){
+	return movekoma+'2';
+    }else{
+	return '-'+movekoma+'2';
+    }
 }
 
-// ‹î‚Ì–¼‘O‚ğƒvƒŒƒCƒ„[‚É‚æ‚Á‚Ä•Ï‚¦‚é
+// é§’ã®åå‰ã‚’ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ã‚ˆã£ã¦å¤‰ãˆã‚‹
 function changeMotikomaNameByPlayer(koma,player){
-	if(koma.substr(0,1)=='-'){
-		return koma.substr(1,2)+player;
-	}else{
-		return koma.substr(0,2)+player;
-	}
+    if(koma.substr(0,1)=='-'){
+	return koma.substr(1,2)+player;
+    }else{
+	return koma.substr(0,2)+player;
+    }
 }
 
-// —á:ufu1.svgv‚©‚çufu1v‚ğæ“¾
+// ä¾‹:ã€Œfu1.svgã€ã‹ã‚‰ã€Œfu1ã€ã‚’å–å¾—
 function getKomaNameByFilename(Fname){
-	if(Fname.substr(0,1)=='-'){
-		return Fname.substr(0,4);
-	}else{
-		return Fname.substr(0,3);
-	}
+    if(Fname.substr(0,1)=='-'){
+	return Fname.substr(0,4);
+    }else{
+	return Fname.substr(0,3);
+    }
 }
 
-// player‚Ì‹î‚Ì‹óid‚ğæ“¾
+// playerã®æŒé§’ã®ç©ºidã‚’å–å¾—
 function getEmptyMotikomaIdByPlayer(player){
-	if(player==1){
-		var cmpId = 301;
-	}else if(player==2){
-		var cmpId = 401;
-	}
-	for(var i=0;i<100;i++){
+    if(player==1){
+	var cmpId = 301;
+    }else if(player==2){
+	var cmpId = 401;
+    }
+    for(var i=0;i<100;i++){
         if((i%10)>3){i+=6;}
-		if(!(document.getElementById(cmpId+i))){
-			return cmpId+i;
+	if(!(document.getElementById(cmpId+i))){
+	    return cmpId+i;
         }
-	}
+    }
 }
 
-// id‚Ì—v‘f‚ğíœ
+// idã®è¦ç´ ã‚’å‰Šé™¤
 function removeById(id){
-	var element = document.getElementById(id);
-	if (!(element == undefined)) {
-		element.parentNode.removeChild(element);
-	}
+    var element = document.getElementById(id);
+    if (!(element == undefined)) {
+	element.parentNode.removeChild(element);
+    }
 }
 
-// id‚©‚ç‹î‚ÌxˆÊ’u‚ğæ“¾
+// idã‹ã‚‰é§’ã®xä½ç½®ã‚’å–å¾—
 function getXById(id){
-	if(id<100){
-		return 880-Math.floor(id/10)*60;
-	}else if((id>200)&&(id<300)){
-		return 880-Math.floor((id-200)/10)*60;
-	}else if((id>300)&&(id<400)){
-		return (((id-300)%10)*60)+885;
-	}else if((id>400)&&(id<500)){
-		return 275-(((id-400)%10)*60);
-	}
+    if(id<100){
+	return 880-Math.floor(id/10)*60;
+    }else if((id>200)&&(id<300)){
+	return 880-Math.floor((id-200)/10)*60;
+    }else if((id>300)&&(id<400)){
+	return (((id-300)%10)*60)+885;
+    }else if((id>400)&&(id<500)){
+	return 275-(((id-400)%10)*60);
+    }
 }
 
-// id‚©‚ç‹î‚ÌyˆÊ’u‚ğæ“¾
+// idã‹ã‚‰é§’ã®yä½ç½®ã‚’å–å¾—
 function getYById(id){
-	if(id<100){
-		return (id%10)*64-32;
-	}else if((id>200)&&(id<300)){
-		return ((id-200)%10)*64-32;
-	}else if((id>300)&&(id<400)){
-		return (Math.floor((id-300)/10)*70)+348;
-	}else if((id>400)&&(id<500)){
-		return 228-(Math.floor((id-400)/10)*70);
-	}
+    if(id<100){
+	return (id%10)*64-32;
+    }else if((id>200)&&(id<300)){
+	return ((id-200)%10)*64-32;
+    }else if((id>300)&&(id<400)){
+	return (Math.floor((id-300)/10)*70)+348;
+    }else if((id>400)&&(id<500)){
+	return 228-(Math.floor((id-400)/10)*70);
+    }
 }
 
-// ‹î‚Ì–¼‘O‚©‚çƒvƒŒƒCƒ„[–¼‚ğæ“¾
+// é§’ã®åå‰ã‹ã‚‰ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼åã‚’å–å¾—
 function getPlayerByKomaName(komaName){
-	if(komaName.substr(0,1)=='-'){
-		return komaName.substr(3,1)-0;
-	}else{
-		return komaName.substr(2,1)-0;
-	}
+    if(komaName.substr(0,1)=='-'){
+	return komaName.substr(3,1)-0;
+    }else{
+	return komaName.substr(2,1)-0;
+    }
 }
 
-// x,y,id,komaName‚©‚çimage—v‘f‚ğì¬
+// x,y,id,komaNameã‹ã‚‰imageè¦ç´ ã‚’ä½œæˆ
 function createImageElement(x,y,id,komaName){
-	var image = document.createElementNS('http://www.w3.org/2000/svg','image');
-	image.setAttributeNS(null,'x',x);
-	image.setAttributeNS(null,'y',y);
-	image.setAttributeNS(null,'width',60);
-	image.setAttributeNS(null,'height',64);
-	image.setAttributeNS(null,'id',id);
-	image.setAttributeNS('http://www.w3.org/1999/xlink','xlink:href',komaName+'.SVG');
-	if(getPlayerByKomaName(komaName)==1){
-		image.setAttribute('onclick','syougi('+id+')');
-	}
-	return image;
+    var image = document.createElementNS('http://www.w3.org/2000/svg','image');
+    image.setAttributeNS(null,'x',x);
+    image.setAttributeNS(null,'y',y);
+    image.setAttributeNS(null,'width',60);
+    image.setAttributeNS(null,'height',64);
+    image.setAttributeNS(null,'id',id);
+    image.setAttributeNS('http://www.w3.org/1999/xlink','xlink:href',komaName+'.SVG');
+    if(getPlayerByKomaName(komaName)==1){
+	image.setAttribute('onclick','syougi('+id+')');
+    }
+    return image;
 }
 
 function createAnimateXElement(fromX,toX){
-	var animate = document.createElementNS('http://www.w3.org/2000/svg','animate');
-	animate.setAttributeNS(null,'attributeName','x');
-	animate.setAttributeNS(null,'begin','indefinite');
-	animate.setAttributeNS(null,'dur',2);
-	animate.setAttributeNS(null,'from',fromX);
-	animate.setAttributeNS(null,'to',toX);
-	animate.setAttributeNS(null, 'repeatCount', 1);
-	return(animate);
+    var animate = document.createElementNS('http://www.w3.org/2000/svg','animate');
+    animate.setAttributeNS(null,'attributeName','x');
+    animate.setAttributeNS(null,'begin','indefinite');
+    animate.setAttributeNS(null,'dur',2);
+    animate.setAttributeNS(null,'from',fromX);
+    animate.setAttributeNS(null,'to',toX);
+    animate.setAttributeNS(null, 'repeatCount', 1);
+    return(animate);
 }
 
 function createAnimateYElement(fromY,toY){
-	var animate = document.createElementNS('http://www.w3.org/2000/svg','animate');
-	animate.setAttributeNS(null,'attributeName','y');
-	animate.setAttributeNS(null,'begin','indefinite');
-	animate.setAttributeNS(null,'dur',2);
-	animate.setAttributeNS(null,'from',fromY);
-	animate.setAttributeNS(null,'to',toY);
-	animate.setAttributeNS(null,'repeatCount',1);
-	return (animate);
+    var animate = document.createElementNS('http://www.w3.org/2000/svg','animate');
+    animate.setAttributeNS(null,'attributeName','y');
+    animate.setAttributeNS(null,'begin','indefinite');
+    animate.setAttributeNS(null,'dur',2);
+    animate.setAttributeNS(null,'from',fromY);
+    animate.setAttributeNS(null,'to',toY);
+    animate.setAttributeNS(null,'repeatCount',1);
+    return (animate);
 }
 
-// svg‚É—v‘f‚ğ’Ç‰Á
+// svgã«è¦ç´ ã‚’è¿½åŠ 
 function SVGappendChildByElement(element){
-	var objBody = document.getElementsByTagName('svg').item(0);
-	return objBody.appendChild(element);
+    var objBody = document.getElementsByTagName('svg').item(0);
+    return objBody.appendChild(element);
 }
 
-// id‚ÌˆÊ’u‚É‹î‚ª‚ ‚é‚©
+// idã®ä½ç½®ã«é§’ãŒã‚ã‚‹ã‹
 function ifThereIsKoma(id){
-	if(document.getElementById(id)){
-		return true;
-	}else{
-		return false;
-	}
+    if(document.getElementById(id)){
+	return true;
+    }else{
+	return false;
+    }
 }
 
 function jsflagToLispflag(flag){
-	if(flag==true){
-		return 1;
-	}else{
-		return 0;
-	}
+    if(flag==true){
+	return 1;
+    }else{
+	return 0;
+    }
 }
 
-// websocket‚ğg‚¢ƒƒbƒZ[ƒW‚ğ‘—M
+// websocketã‚’ä½¿ã„ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é€ä¿¡
 function sendMessage(type, from, to, komaFilename, naruflag) {
     if (!(komaFilename==null)) {
 	var komaName = getKomaNameByFilename(komaFilename);
@@ -285,6 +299,7 @@ function sendMessage(type, from, to, komaFilename, naruflag) {
 	from=0;
     }
     if(komaName.substr(0,1)=='-'){
+        naruflag=true;
         komaName=komaName.substr(1,2);
     }
     var naru = jsflagToLispflag(naruflag);
@@ -298,25 +313,25 @@ function sendMessage(type, from, to, komaFilename, naruflag) {
     theMessage = JSON.stringify(theMessage);
     console.log("send->" + theMessage);
     ws.send(theMessage);
-//    if(ws.readyState==2){
-//	console.log(3);
-//    }
+    //    if(ws.readyState==2){
+    //	console.log(3);
+    //    }
 }
 
 
 
-// Ú‘±ƒtƒ‰ƒO‚ğtrue‚É
+// æ¥ç¶šãƒ•ãƒ©ã‚°ã‚’trueã«
 function setWSflag() {
     var wsflagElement = document.getElementById(2);
     wsflagElement.setAttribute('id', 3);
 }
 
-// ws‚ğ•Â‚¶‚é
+// wsã‚’é–‰ã˜ã‚‹
 function closeWS() {
-	if(ws)ws.close();
+    if(ws)ws.close();
 }
 
 function resetTurnflag() {
-	var turnflagElement = document.getElementById(1);
-	turnflagElement.setAttribute('id', 0);
+    var turnflagElement = document.getElementById(1);
+    turnflagElement.setAttribute('id', 0);
 }

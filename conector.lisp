@@ -1,16 +1,31 @@
-(defparameter *home-path* "/home/katou/public_html/cl")
+;; (defparameter *home-path* "/home/katou/public_html/cl")
 
-(mapc (lambda (file)
-		(load (concatenate 'string
-						   *home-path*
-						   file)))
-	  '("/make-data-init.lisp"
-		"/make-evalfn.lisp"
-		"/base.lisp"
-		"/alpha-beta-searcher.lisp"
-		"/data/all-states.lisp"
-		"/data/value.lisp"
-		))
+;; (mapc (lambda (file)
+;; 		(load (concatenate 'string
+;; 						   *home-path*
+;; 						   file)))
+;; 	  '("/make-data-init.lisp"
+;; 		"/make-evalfn.lisp"
+;; 		"/base.lisp"
+;; 		"/alpha-beta-searcher.lisp"
+;; 		"/data/all-states.lisp"
+;; 		"/data/value.lisp"
+;; 		))
+
+;;; hkim changed.
+;;; load data and functions under folder 'cl'.
+(mapc (lambda (name)
+        (load  (merge-pathnames name *default-pathname-defaults*)))
+	  '(
+        "cl/def-structs.lisp"
+        "cl/data/all-states.lisp"
+		"cl/data/value.lisp"
+        "cl/base.lisp"
+        "cl/make-data-init.lisp"
+		"cl/make-evalfn.lisp"
+        "cl/alpha-beta-searcher.lisp"
+        ))
+;;;
 
 (defparameter *eval-fn*  (make-evalfn (first *value*) (second *value*)))
 (defparameter *depth*    4)

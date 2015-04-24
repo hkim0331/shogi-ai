@@ -10,7 +10,7 @@ function addlog(oldId, newId, koma) {
 		var g = createGElement(990, 70, 0.5, logId);
 		g.appendChild(createImageElement(60, 0, undefined, 'font/' + Math.floor(newId / 10)));
 		g.appendChild(createImageElement(100, 0, undefined, ('font/' + newId % 10) + newId % 10));
-		g.appendChild(createImageElement(150, 0, undefined, koma));
+		g.appendChild(createImageElement(150, 0, undefined, koma.toUpperCase()));
 		oldLogStack.push(g);
 		logId++;
 	} else {
@@ -27,7 +27,7 @@ function addlog(oldId, newId, koma) {
 			active('beforeIcon');
 		}
 		upLogs();
-		addNewLog(g, newId, koma);
+		addNewLog(g, newId, koma.toUpperCase());
 		logId++;
 	}
 }
