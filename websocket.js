@@ -4,7 +4,8 @@ window.onload = function () {
     //var host = location.host;
     //var sliceHost = host.substr(0,host.length - 5);
     //
-    uri = 'ws://'+location.host+':20141/shogi-ai';
+    uri = 'ws://'+location.host+':20141/shogi-ws';
+    uri = 'ws://'+location.host+'/shogi-ws';
     //
     //alert(uri);
     ws = new WebSocket(uri);
@@ -23,10 +24,10 @@ window.onload = function () {
 function selectSenkou(){
     var flg = confirm('you first?');
     if(flg){
-	sendMessage('init',0);
+    sendMessage('init',0);
     }else{
-	setTurnFlg();
-	sendMessage('init',1);
+    setTurnFlg();
+    sendMessage('init',1);
     }
 }
 
@@ -51,9 +52,9 @@ function startAnimation(fromId) {
 
 function getJsFlagByLispFlag(flag){
     if (flag == 't') {
-	return true;
+    return true;
     } else {
-	return false
+    return false
     }
 }
 
@@ -88,7 +89,7 @@ function movePlayer2Koma(event) {
             gamesetFlag=true;
             setTimeout(function(){alert('you lose')},2000);
         }
-	setTimeout(function(){removeKoma(2,moveId);},2000);
+    setTimeout(function(){removeKoma(2,moveId);},2000);
     }
     setTimeout(function () { addlog(mArray[0] * 10 + mArray[1], moveId, putKoma); }, 2000);
     setTimeout(function () { resetTurnflag(); }, 2000);
@@ -96,25 +97,25 @@ function movePlayer2Koma(event) {
 
 function checkOu(newId){
     if (ifThereIsKoma(newId)) {
-	var opponentKoma = document.getElementById(newId).getAttribute('xlink:href');
-	if((opponentKoma.toUpperCase())=='OU1.SVG'){
-	    setTimeout(function(){alert('you lose');},1500)
-	}
+    var opponentKoma = document.getElementById(newId).getAttribute('xlink:href');
+    if((opponentKoma.toUpperCase())=='OU1.SVG'){
+        setTimeout(function(){alert('you lose');},1500)
+    }
     }
 }
 
 // 
 function getOldPlayer2KomaId(id,koma){
     if (id == 0) {
-	for (var i = 401; i < 600; i++) {
-	    if (document.getElementById(i)) {
-		if (getKomaNameById(i).substr(0, 2) == koma) {
-		    return i;
-		}
-	    }
-	}
+    for (var i = 401; i < 600; i++) {
+        if (document.getElementById(i)) {
+        if (getKomaNameById(i).substr(0, 2) == koma) {
+            return i;
+        }
+        }
+    }
     } else {
-	return id+200;
+    return id+200;
     }
 }
 
@@ -146,41 +147,41 @@ function appendPlayerMotikomaByOpponentKomaId(player, opponentKomaId) {
 // 移動した後の駒を取得
 function getPutKoma(movekoma,nariflag){
     if(nariflag=='n'){
-	return movekoma+'2';
+    return movekoma+'2';
     }else{
-	return '-'+movekoma+'2';
+    return '-'+movekoma+'2';
     }
 }
 
 // 駒の名前をプレイヤーによって変える
 function changeMotikomaNameByPlayer(koma,player){
     if(koma.substr(0,1)=='-'){
-	return koma.substr(1,2)+player;
+    return koma.substr(1,2)+player;
     }else{
-	return koma.substr(0,2)+player;
+    return koma.substr(0,2)+player;
     }
 }
 
 // 例:「fu1.svg」から「fu1」を取得
 function getKomaNameByFilename(Fname){
     if(Fname.substr(0,1)=='-'){
-	return Fname.substr(0,4);
+    return Fname.substr(0,4);
     }else{
-	return Fname.substr(0,3);
+    return Fname.substr(0,3);
     }
 }
 
 // playerの持駒の空idを取得
 function getEmptyMotikomaIdByPlayer(player){
     if(player==1){
-	var cmpId = 301;
+    var cmpId = 301;
     }else if(player==2){
-	var cmpId = 401;
+    var cmpId = 401;
     }
     for(var i=0;i<100;i++){
         if((i%10)>3){i+=6;}
-	if(!(document.getElementById(cmpId+i))){
-	    return cmpId+i;
+    if(!(document.getElementById(cmpId+i))){
+        return cmpId+i;
         }
     }
 }
@@ -189,42 +190,42 @@ function getEmptyMotikomaIdByPlayer(player){
 function removeById(id){
     var element = document.getElementById(id);
     if (!(element == undefined)) {
-	element.parentNode.removeChild(element);
+    element.parentNode.removeChild(element);
     }
 }
 
 // idから駒のx位置を取得
 function getXById(id){
     if(id<100){
-	return 880-Math.floor(id/10)*60;
+    return 880-Math.floor(id/10)*60;
     }else if((id>200)&&(id<300)){
-	return 880-Math.floor((id-200)/10)*60;
+    return 880-Math.floor((id-200)/10)*60;
     }else if((id>300)&&(id<400)){
-	return (((id-300)%10)*60)+885;
+    return (((id-300)%10)*60)+885;
     }else if((id>400)&&(id<500)){
-	return 275-(((id-400)%10)*60);
+    return 275-(((id-400)%10)*60);
     }
 }
 
 // idから駒のy位置を取得
 function getYById(id){
     if(id<100){
-	return (id%10)*64-32;
+    return (id%10)*64-32;
     }else if((id>200)&&(id<300)){
-	return ((id-200)%10)*64-32;
+    return ((id-200)%10)*64-32;
     }else if((id>300)&&(id<400)){
-	return (Math.floor((id-300)/10)*70)+348;
+    return (Math.floor((id-300)/10)*70)+348;
     }else if((id>400)&&(id<500)){
-	return 228-(Math.floor((id-400)/10)*70);
+    return 228-(Math.floor((id-400)/10)*70);
     }
 }
 
 // 駒の名前からプレイヤー名を取得
 function getPlayerByKomaName(komaName){
     if(komaName.substr(0,1)=='-'){
-	return komaName.substr(3,1)-0;
+    return komaName.substr(3,1)-0;
     }else{
-	return komaName.substr(2,1)-0;
+    return komaName.substr(2,1)-0;
     }
 }
 
@@ -238,7 +239,7 @@ function createImageElement(x,y,id,komaName){
     image.setAttributeNS(null,'id',id);
     image.setAttributeNS('http://www.w3.org/1999/xlink','xlink:href',komaName+'.SVG');
     if(getPlayerByKomaName(komaName)==1){
-	image.setAttribute('onclick','syougi('+id+')');
+    image.setAttribute('onclick','syougi('+id+')');
     }
     return image;
 }
@@ -274,29 +275,29 @@ function SVGappendChildByElement(element){
 // idの位置に駒があるか
 function ifThereIsKoma(id){
     if(document.getElementById(id)){
-	return true;
+    return true;
     }else{
-	return false;
+    return false;
     }
 }
 
 function jsflagToLispflag(flag){
     if(flag==true){
-	return 1;
+    return 1;
     }else{
-	return 0;
+    return 0;
     }
 }
 
 // websocketを使いメッセージを送信
 function sendMessage(type, from, to, komaFilename, naruflag) {
     if (!(komaFilename==null)) {
-	var komaName = getKomaNameByFilename(komaFilename);
+    var komaName = getKomaNameByFilename(komaFilename);
     } else {
-	var komaName = 'aaa';
+    var komaName = 'aaa';
     }
     if(from>300){
-	from=0;
+    from=0;
     }
     if(komaName.substr(0,1)=='-'){
         naruflag=true;
@@ -306,15 +307,15 @@ function sendMessage(type, from, to, komaFilename, naruflag) {
     var theMessage = {
         'type':type,
         'to':to ,
-	'from':from ,
-	'name':komaName.substr(0,2),
-	'prom':naru
+    'from':from ,
+    'name':komaName.substr(0,2),
+    'prom':naru
     };
     theMessage = JSON.stringify(theMessage);
     console.log("send->" + theMessage);
     ws.send(theMessage);
     //    if(ws.readyState==2){
-    //	console.log(3);
+    //    console.log(3);
     //    }
 }
 
