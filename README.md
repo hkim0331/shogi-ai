@@ -1,6 +1,11 @@
 # shogi-ai
 
-## INSTALL
+
+----
+このプログラムの元は、common lisp で websocket の実験をするための js-ws-cl.lisp だった。
+そのファイル名がそのまま残っている。
+
+## INSTALL(OLD)
 
 このフォルダのコピー先を js-ws-cl.lisp の :document-root に指定すること。
 
@@ -25,10 +30,6 @@ $ make start
 ````
 $ make stop
 ````
-
-----
-このプログラムの元は、common lisp で websocket の実験をするための js-ws-cl.lisp だった。
-そのファイル名がそのまま残っている。
 
 # was downup
 

@@ -52,7 +52,7 @@
          :reader name
          :initform (error "Name this user!"))))
 
-(defvar *resources* (list (make-instance 'resource :name "/shogi-ai")))
+(defvar *resources* (list (make-instance 'resource :name "/shogi-ws")))
 
 (defun find-resource (request)
   (find (hunchentoot:script-name request)
