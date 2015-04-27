@@ -1,6 +1,7 @@
 shogi-ai: shogi-ai.lisp
 	sbcl --load shogi-ai.lisp \
-		--eval "(sb-ext:save-lisp-and-die \"shogi-ai\" :executable t :toplevel 'main)" 
+		--eval "(in-package :shogi-ai)" \
+		--eval "(sb-ext:save-lisp-and-die \"shogi-ai\" :executable t :toplevel 'main)"
 
 start: shogi-ai
 #	./shogi-ai 2>/dev/null &
