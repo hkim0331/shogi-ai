@@ -65,10 +65,9 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
-    mv /etc/apt/sources.list /etc/apt/sources.list.orig
-    cp /vagrant/sources.list.jp /etc/apt/sources.list
+    sed -i.bak 's/archive/jp.archive/g' /etc/apt/sources.listZ
     sudo apt-get update
     sudo apt-get install -y nginx sbcl
-    sh quicklisp-setup
+    sh /vagrant/quicklisp-setup
   SHELL
 end
