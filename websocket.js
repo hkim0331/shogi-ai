@@ -4,10 +4,10 @@ window.onload = function () {
     //var host = location.host;
     //var sliceHost = host.substr(0,host.length - 5);
     //
-    uri = 'ws://'+location.host+':20141/shogi-ws';
-    uri = 'ws://'+location.host+'/shogi-ws';
+    //uri = 'ws://'+location.host+':20141/shogi-ws';
+    uri = 'ws://localhost:20141/shogi-ws';
     //
-    //alert(uri);
+    alert(uri);
     ws = new WebSocket(uri);
     ws.onopen = function () {
         console.log('connect');

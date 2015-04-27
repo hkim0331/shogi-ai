@@ -307,4 +307,5 @@ function sim(from, koma, to,nArg) {
 	var array = new Array(Math.floor(from/10), (from%10), koma, Math.floor(to/10), (to%10), nFlag);
 	var simMessage = { data: array };
 	movePlayer2Koma(simMessage);
+
 }

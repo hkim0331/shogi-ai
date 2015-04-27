@@ -119,5 +119,6 @@
   ;; 起動を維持するために無限ループする
   (loop (sleep 60)))
 
+;; これ、Makefile に移せないか？
 (sb-ext:save-lisp-and-die "shogi-ai" :executable t :toplevel 'main)
 

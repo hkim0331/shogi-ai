@@ -1,9 +1,10 @@
 # shogi-ai
 
-
-----
+---
 このプログラムの元は、common lisp で websocket の実験をするための js-ws-cl.lisp だった。
 そのファイル名がそのまま残っている。
+
+---
 
 ## INSTALL(OLD)
 
