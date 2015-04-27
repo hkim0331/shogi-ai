@@ -1,4 +1,5 @@
-#how to dump?
+# VERSION:
+
 shogi-ai: shogi-ai.lisp
 	sbcl --load shogi-ai.lisp \
 		--eval "(in-package :shogi-ai)" \
@@ -20,5 +21,5 @@ init:
 	fi
 
 clean:
-	${RM} *~ shogi-ai
+	${RM} *.bak *~ shogi-ai
 

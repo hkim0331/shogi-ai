@@ -69,5 +69,6 @@ Vagrant.configure(2) do |config|
     cp /vagrant/sources.list.jp /etc/apt/sources.list
     sudo apt-get update
     sudo apt-get install -y nginx sbcl
+    sh quicklisp-setup
   SHELL
 end
