@@ -1,13 +1,8 @@
+// VERSION:
+
 // 移動できる場所を選択後に情報を送信
 window.onload = function () {
-    //BUG
-    //var host = location.host;
-    //var sliceHost = host.substr(0,host.length - 5);
-    //
-    //uri = 'ws://'+location.host+':20141/shogi-ws';
-    // I wish...
-    uri = 'ws://'+location.host+':20141/shogi-ws';
-    //
+    uri = 'ws://localhost:20141/shogi-ws';
     alert(uri);
     ws = new WebSocket(uri);
     ws.onopen = function () {
