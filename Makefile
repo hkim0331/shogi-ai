@@ -1,4 +1,4 @@
-# VERSION:
+# VERSION: 2.1
 
 shogi-ai: shogi-ai.lisp
 	sbcl --load shogi-ai.lisp \

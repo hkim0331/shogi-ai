@@ -31,7 +31,7 @@ done
 CONF="Makefile Vagrantfile nginx/sites-available/shogi-ai"
 for i in ${CONF}; do
     echo $i
-    ${SED} -i.bak  "/^#\/\/ VERSION:/ c\
+    ${SED} -i.bak  "/^# VERSION:/ c\
 # VERSION: ${VERSION}" $i
 done
 
