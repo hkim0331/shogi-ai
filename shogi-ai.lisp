@@ -2,7 +2,8 @@
 ;; hiroshi.kimura.0331@gmail.com, 2015-01-07.
 ;;
 ;; modified 2015-04-23, document-root
-;; 2015-04-24. change ports 20140 and 20141.
+;; 2015-04-24, change ports 20140 and 20141.
+;; 2015-04-27, try nginx reverse proxy.
 
 (ql:quickload :cl-who)
 (ql:quickload :cl-json)
@@ -119,5 +120,7 @@
   ;; 起動を維持するために無限ループする
   (loop (sleep 60)))
 
-(sb-ext:save-lisp-and-die "shogi-ai" :executable t :toplevel 'main)
+;; これ、Makefile に移せないか？
+;;(sb-ext:save-lisp-and-die "shogi-ai" :executable t :toplevel 'main)
+
 
