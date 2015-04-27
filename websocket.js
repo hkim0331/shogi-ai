@@ -2,10 +2,12 @@
 
 // 移動できる場所を選択後に情報を送信
 window.onload = function () {
+    // no-proxy
     //uri = 'ws://192.168.33.10:20141/shogi-ws';
-    uri = 'ws://vagrant:20141/shogi-ws';
-    //uri = 'ws://vagrant/shogi-ws';
+    // http-proxy
+    uri = 'ws://vs/shogi-ws';
     alert(uri);
+
     ws = new WebSocket(uri);
     ws.onopen = function () {
         console.log('connect');

@@ -65,7 +65,7 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
-    sed -i.bak 's/archive/jp.archive/g' /etc/apt/sources.listZ
+    sed -i.bak 's/archive/jp.archive/g' /etc/apt/sources.list
     sudo apt-get update
     sudo apt-get install -y nginx sbcl
     sudo mv /etc/nginx /vagrant
