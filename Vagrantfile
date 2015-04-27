@@ -68,6 +68,8 @@ Vagrant.configure(2) do |config|
     sed -i.bak 's/archive/jp.archive/g' /etc/apt/sources.listZ
     sudo apt-get update
     sudo apt-get install -y nginx sbcl
+    sudo mv /etc/nginx /vagrant
+    sudo ln -s /vagrant/nginx /etc/nginx
     sh /vagrant/quicklisp-setup
   SHELL
 end
