@@ -4,20 +4,29 @@ window.onload = function () {
     //var host = location.host;
     //var sliceHost = host.substr(0,host.length - 5);
     //
+    //uri = 'ws://'+location.host+':20141/shogi-ws';
+    // I wish...
     uri = 'ws://'+location.host+':20141/shogi-ws';
-    uri = 'ws://'+location.host+'/shogi-ws';
     //
-    //alert(uri);
+    alert(uri);
     ws = new WebSocket(uri);
     ws.onopen = function () {
         console.log('connect');
         setWSflag();
         selectSenkou();
     };
-    ws.onmessage = function (event) { movePlayer2Koma(event); };
-    window.onunload = function () { closeWS(); };
-    ws.onclose=function(){console.log(4);};
-    ws.onerror=function(error){console.log(error);};
+    ws.onmessage = function (event) {
+        movePlayer2Koma(event);
+    };
+    window.onunload = function () {
+        closeWS();
+    };
+    ws.onclose = function() {
+        console.log(4);
+    };
+    ws.onerror = function(error) {
+        console.log(error);
+    };
     appendAddIcon();
 }
 

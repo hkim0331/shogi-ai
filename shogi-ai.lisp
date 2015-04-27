@@ -121,3 +121,4 @@
 
 (sb-ext:save-lisp-and-die "shogi-ai" :executable t :toplevel 'main)
 
+

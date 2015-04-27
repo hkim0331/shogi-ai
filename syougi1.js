@@ -336,17 +336,19 @@ function removeCanMoveImage() {
 
 function ifPlayer2Turn() {
     if (document.getElementById(1)) {
-    return true;
+        return true;
     } else {
-    return false;
+        return false;
     }
 }
 
+//FIXME: document.getElementById(3)がなんで ifConnectWsServer()なのかわからん。
+//スペルミスもある。return true, false も稚拙。
 function ifConectWsServer() {
     if (document.getElementById(3)) {
-    return true;
+        return true;
     } else {
-    return false;
+        return false;
     }
 }
 
