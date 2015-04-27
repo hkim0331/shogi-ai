@@ -119,6 +119,7 @@
 (defun main (&optional (w 20140) (s 20141))
   (start-server w)
   (start-websocket s)
+  (format t "started (http, ws) at (~a, ~a).~%" w s)
   ;; 起動を維持するために無限ループする
   (loop (sleep 60)))
 

@@ -7,7 +7,7 @@ shogi-ai: shogi-ai.lisp
 
 start: shogi-ai
 #	./shogi-ai 2>/dev/null &
-	./shogi-ai &
+	./shogi-ai
 
 stop:
 	kill `ps ax | grep '[s]hogi-ai' | awk '{print $$1}'`
