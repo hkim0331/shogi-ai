@@ -11,6 +11,14 @@ start: shogi-ai
 stop:
 	kill `ps ax | grep '[s]hogi-ai' | awk '{print $$1}'`
 
+init:
+	if [ `uname` = "Linux" ]; then \
+		install -m 0755 shogi-ai.service /etc/init.d/shogi-ai; \
+		update-rc.d shogi-ai defaults; \
+	else \
+		@echo "no use on " `uname`;
+	fi
+
 clean:
 	${RM} *~ shogi-ai
 
