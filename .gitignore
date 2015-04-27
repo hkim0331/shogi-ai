@@ -1,3 +1,4 @@
+log/
 test/
 *.dx64fsl
 *.fasl
