@@ -21,12 +21,19 @@ for i in ${LISP}; do
 ;; VERSION: ${VERSION}" $i
 done
 
- JS="websocket.js"
- for i in ${JS}; do
-     echo $i
-     ${SED} -i.bak "/^#\/\/ VERSION:/ c\
- // VERSION: ${VERSION}" $i
- done
+JS="websocket.js"
+for i in ${JS}; do
+    echo $i
+    ${SED} -i.bak "/^#\/\/ VERSION:/ c\
+// VERSION: ${VERSION}" $i
+done
+
+CONF="Makefile Vagrantfile nginx/sites-available/shogi-ai"
+for i in ${CONF}; do
+    echo $i
+    ${SED} -i.bak  "/^# VERSION:/ c\
+# VERSION: ${VERSION}" $i
+done
 
 echo ${VERSION} > VERSION
 
