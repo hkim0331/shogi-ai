@@ -1,5 +1,14 @@
 # shogi-ai
 
+## 2.0
+
+vagrant(ubuntu/trusty64) で出直し。
+
+* ファイルの属性
+* Makefile
+* bump_version.sh
+
+
 ---
 このプログラムの元は、common lisp で websocket の実験をするための js-ws-cl.lisp だった。
 そのファイル名がそのまま残っている。

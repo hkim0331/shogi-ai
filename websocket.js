@@ -2,7 +2,7 @@
 
 // 移動できる場所を選択後に情報を送信
 window.onload = function () {
-    uri = 'ws://localhost:20141/shogi-ws';
+    uri = 'ws://192.168.33.10:20141/shogi-ws';
     alert(uri);
     ws = new WebSocket(uri);
     ws.onopen = function () {
