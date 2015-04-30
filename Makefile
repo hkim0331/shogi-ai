@@ -21,5 +21,5 @@ init:
 	fi
 
 clean:
-	${RM} *.bak *~ shogi-ai
+	${RM} *.bak *~ .\#* shogi-ai
 
