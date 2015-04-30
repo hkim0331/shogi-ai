@@ -17,14 +17,14 @@ fi
 LISP="shogi-ai.lisp"
 for i in ${LISP}; do
     echo $i
-    ${SED} -i.bak "/^#;; VERSION:/ c\
+    ${SED} -i.bak "/^;; VERSION:/ c\
 ;; VERSION: ${VERSION}" $i
 done
 
 JS="websocket.js"
 for i in ${JS}; do
     echo $i
-    ${SED} -i.bak "/^#\/\/ VERSION:/ c\
+    ${SED} -i.bak "/^\/\/ VERSION:/ c\
 // VERSION: ${VERSION}" $i
 done
 

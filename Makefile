@@ -1,4 +1,4 @@
-# VERSION: 2.1
+# VERSION: 2.2
 
 shogi-ai: shogi-ai.lisp
 	sbcl --load shogi-ai.lisp \
@@ -21,5 +21,5 @@ init:
 	fi
 
 clean:
-	${RM} *.bak *~ shogi-ai
+	${RM} *.bak *~ .\#* shogi-ai
 

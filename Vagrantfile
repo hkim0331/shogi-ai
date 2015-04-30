@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 #
-# VERSION: 2.1
+# VERSION: 2.2
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
@@ -70,8 +70,12 @@ Vagrant.configure(2) do |config|
     sed -i.bak 's/archive/jp.archive/g' /etc/apt/sources.list
     sudo apt-get update
     sudo apt-get install -y nginx sbcl
-    sudo mv /etc/nginx /vagrant
+    sudo mv /etc/nginx /etc/nginx.orig
     sudo ln -s /vagrant/nginx /etc/nginx
-    sh /vagrant/quicklisp-setup
+    sudo mv /var/log/nginx /var/log/nginx.orig
+    sudo ln -s /vagrant/log /var/log/nginx
+    sudo service nginx restart
+    # NG
+    # yes | sh /vagrant/quicklisp-setup.sh
   SHELL
 end

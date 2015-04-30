@@ -5,7 +5,7 @@
 ;; 2015-04-24, change ports 20140 and 20141.
 ;; 2015-04-27, try nginx reverse proxy.
 ;;
-;; VERSION: 1.0
+;; VERSION: 2.2
 
 (ql:quickload :cl-who)
 (ql:quickload :cl-json)
@@ -32,9 +32,11 @@
     (push (create-static-file-dispatcher-and-handler
            "/index.html" "index.html") *dispatch-table*)
     (push (create-static-file-dispatcher-and-handler
-           "/shogi-ai.css" "static/shogi-ai.css") *dispatch-table*)
-    (push (create-static-file-dispatcher-and-handler
-         "/shogi-ai.js" "static/shogi-ai.js") *dispatch-table*))
+           "/try1.html" "try1.html") *dispatch-table*))
+    ;; (push (create-static-file-dispatcher-and-handler
+    ;;        "/shogi-ai.css" "static/shogi-ai.css") *dispatch-table*)
+    ;; (push (create-static-file-dispatcher-and-handler
+    ;;        "/shogi-ai.js" "static/shogi-ai.js") *dispatch-table*))
 
 (publish-static-content)
 
@@ -70,11 +72,9 @@
    (apply #'format nil message args)))
 
 ;;FIXME.
-;;necessary.
 (defmethod hunchensocket:client-connected ((route resource) client)
   (initialize)
-  (unicast route "~a has joined ~a" (name client) (name route))
-  )
+  (unicast route "~a has joined ~a" (name client) (name route)))
 
 (defmethod hunchensocket:client-disconnected ((route resource) client)
   (unicast route "~a has left ~a" (name client) (name route)))
@@ -123,7 +123,7 @@
   ;; 起動を維持するために無限ループする
   (loop (sleep 60)))
 
-;; これ、Makefile に移せないか？
+;; moved to Makefile.
 ;;(sb-ext:save-lisp-and-die "shogi-ai" :executable t :toplevel 'main)
 
 

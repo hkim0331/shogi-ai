@@ -1,5 +1,15 @@
 # shogi-ai
 
+## 2.1 nginx reverse proxy
+
+しかし、これだと、別の websocket アプリと両立しないだろう。
+
+```
+   location / {
+         proxy_pass http://127.0.0.1:20141/;
+   }
+```
+
 ## 2.0
 
 vagrant(ubuntu/trusty64) で出直し。

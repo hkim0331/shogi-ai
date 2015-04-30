@@ -1,12 +1,10 @@
-// VERSION:
+// VERSION: 2.2
 
 // 移動できる場所を選択後に情報を送信
 window.onload = function () {
-    // no-proxy
-    //uri = 'ws://192.168.33.10:20141/shogi-ws';
-    // http-proxy
+    // nginx reverse-proxy, this must be changed.
     uri = 'ws://vs/shogi-ws';
-    alert(uri);
+    //alert(uri);
 
     ws = new WebSocket(uri);
     ws.onopen = function () {
