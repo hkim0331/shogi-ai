@@ -1,4 +1,4 @@
-// VERSION:
+// VERSION: 2.2
 
 // 移動できる場所を選択後に情報を送信
 window.onload = function () {

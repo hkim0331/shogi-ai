@@ -5,7 +5,7 @@
 ;; 2015-04-24, change ports 20140 and 20141.
 ;; 2015-04-27, try nginx reverse proxy.
 ;;
-;; VERSION: 1.0
+;; VERSION: 2.2
 
 (ql:quickload :cl-who)
 (ql:quickload :cl-json)
