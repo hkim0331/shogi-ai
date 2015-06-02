@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head>
+<!--
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery.js" />
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" />
+ -->
     <meta charset="utf-8">
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="cache-control" content="no-cache" />
@@ -11,26 +16,28 @@
 
   <body>
 <h1>完全自作対戦将棋 2014PBL</h1>
+<div id="nonedisp">
 
 <p>PBL2014チームがゼロからつくった将棋ゲームです。</p>
-
-<ul>
-  <li>駒、将棋盤のイメージは SVG でプログラムしてます。</li>
-  <li>n手先読みで着手します。CommonLisp でプログラムしてます。</li>
-  <li>プログラムの都合上、同時に対戦できるユーザはひとりです。
-現バージョンは二人目の乱入を阻害しないため、
-二人以上が同時対戦すると盤面が乱れます。着手も乱れます。改良予定。</li>
-  <li>Chrome で動作確認しています。</li>
-</ul>
-
+  <ul>
+    <li>駒、将棋盤のイメージは SVG でプログラムしてます。</li>
+    <li>n手先読みで着手します。CommonLisp でプログラムしてます。</li>
+    <li>プログラムの都合上、同時に対戦できるユーザはひとりです。
+      現バージョンは二人目の乱入を阻害しないため、
+      二人以上が同時対戦すると盤面が乱れます。着手も乱れます。改良予定。</li>
+    <li>Chrome で動作確認しています。</li>
+  </ul>
+</div>
 <hr>
-
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1220" height="640">
+<script xlink:href="setup.js"></script>
+  <!--
   <script xlink:href="syougi1.js"></script>
   <script xlink:href="syougi2.js"></script>
   <script xlink:href="syougi3.js"></script>
   <script xlink:href="websocket.js"></script>
   <script xlink:href="addlog.js"></script>
+-->
   <image x="310" y="0" width="600" height="640" xlink:href="board.svg" onmouseup="reset()" id="0"></image>
   <image x="0" y="0" width="300" height="320" xlink:href="komaoki.svg" onmouseup="reset()"></image>
   <image x="920" y="320" width="300" height="320" xlink:href="komaoki.svg" onmousedown="syougi(999)"></image>

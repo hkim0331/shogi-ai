@@ -3,7 +3,7 @@
 // 移動できる場所を選択後に情報を送信
 window.onload = function () {
     // nginx reverse-proxy, this must be changed.
-    uri = 'ws://vs/shogi-ws';
+    uri = 'ws://localhost:20141/shogi-ws';
     //alert(uri);
 
     ws = new WebSocket(uri);
@@ -20,6 +20,7 @@ window.onload = function () {
     };
     ws.onclose = function() {
         console.log(4);
+        alert('Time up!\nYou lose');location.reload();gamesetFlag=true;
     };
     ws.onerror = function(error) {
         console.log(error);
@@ -78,6 +79,7 @@ function movePlayer2Koma(event) {
     if ((typeof(ary)=='string')||(ary == null)) return;
     var mArray = ary;
     console.log(mArray);
+    window.onerror = function(){alert('mairimasita...');}
     var oldKomaPlayer2Id = getOldPlayer2KomaId(mArray[0] * 10 + mArray[1], mArray[2]);
     var newKomaX = mArray[3];
     var newKomaY = mArray[4];
