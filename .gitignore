@@ -5,4 +5,5 @@ test/
 .AppleDouble
 .DS_Store
 shogi-ai
+nohup.out
 
