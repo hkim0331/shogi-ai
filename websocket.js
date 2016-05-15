@@ -3,7 +3,7 @@
 // 移動できる場所を選択後に情報を送信
 window.onload = function () {
     // nginx reverse-proxy, this must be changed.
-    uri = 'ws://app.melt.kyutech.ac.jp/shogi-ws';
+    uri = 'ws://shogi-ai.melt.kyutech.ac.jp/shogi-ws';
     //alert(uri);
 
     ws = new WebSocket(uri);
