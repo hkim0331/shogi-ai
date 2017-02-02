@@ -7,7 +7,7 @@ function syougi3(num) {
     removeCanMoveImage();
     } else if (id == 'undefined') {
     } else if (! ifConectWsServer()) {
-    alert("-Not conection server.\n-Please wait...");
+    alert("-No conection server(3).\n-Please wait...");
     } else if (ifPlayer2Turn()) {
     alert("-Not your turn.\n-Please wait...");
     } else {

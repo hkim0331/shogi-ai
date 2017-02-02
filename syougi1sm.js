@@ -4,7 +4,7 @@ function syougi(id) {
 	if (ifAlreadyClicked() || (id == 999)) {
 		removeCanMoveImage();
 	}else if(! ifConectWsServer()){
-		alert("-Not conection server.\n-Please wait...");
+		alert("-No conection server(1sm).\n-Please wait...");
 	} else if (! ifPlayer1Turn()) {
 		alert("-Not your turn.\n-Please wait...");
 	} else {

@@ -39,8 +39,8 @@ function syougi(id) {
         return;
     }
     if (id == 'undefined') {
-    }else if(! ifConectWsServer()){
-    alert("-Not conection server.\n-Please wait...");
+    } else if (! ifConectWsServer()){
+    alert("-No conection server(1).\n-Please wait...");
     } else if (ifPlayer2Turn()) {
     alert("-Not your turn.\n-Please wait...");
     } else {
@@ -334,7 +334,11 @@ function removeCanMoveImage() {
     }
 }
 
+//これも。下のコメント参照。
 function ifPlayer2Turn() {
+    //hkim debug
+    //return false;
+    //
     if (document.getElementById(1)) {
         return true;
     } else {
@@ -343,8 +347,12 @@ function ifPlayer2Turn() {
 }
 
 //FIXME: document.getElementById(3)がなんで ifConnectWsServer()なのかわからん。
+//コネクトしたら id=3 の html オブジェクトがページに埋め込まれるってこと？
 //スペルミスもある。return true, false も稚拙。
 function ifConectWsServer() {
+    //hkim debug
+    //return true;
+    //
     if (document.getElementById(3)) {
         return true;
     } else {

@@ -2,9 +2,10 @@
 
 // 移動できる場所を選択後に情報を送信
 window.onload = function () {
-    // nginx reverse-proxy, this must be changed.
+    // NOTE: uri must be changed according to the install destination.
+    // without proxy
+    uri = 'ws://localhost:20141/shogi-ws';
     uri = 'ws://shogi-ai.melt.kyutech.ac.jp/shogi-ws';
-    //alert(uri);
 
     ws = new WebSocket(uri);
     ws.onopen = function () {
@@ -20,7 +21,10 @@ window.onload = function () {
     };
     ws.onclose = function() {
         console.log(4);
-        alert('Time up!\nYou lose');location.reload();gamesetFlag=true;
+        //hkim debug
+        alert('websocket:Time up!\nYou lose');
+        location.reload();
+        gamesetFlag=true;
     };
     ws.onerror = function(error) {
         console.log(error);
@@ -29,13 +33,15 @@ window.onload = function () {
 }
 
 function selectSenkou(){
-    var flg = confirm('you first?');
-    if(flg){
+    //hkim debug
     sendMessage('init',0);
-    }else{
-    setTurnFlg();
-    sendMessage('init',1);
-    }
+    //var flg = confirm('you first?');
+    //if (flg) {
+    // sendMessage('init',0);
+    //} else {
+    // setTurnFlg();
+    // sendMessage('init',1);
+    //};
 }
 
 function removeKoma(player,moveId){
@@ -112,7 +118,7 @@ function checkOu(newId){
     }
 }
 
-// 
+//
 function getOldPlayer2KomaId(id,koma){
     if (id == 0) {
     for (var i = 401; i < 600; i++) {

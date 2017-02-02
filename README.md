@@ -1,5 +1,9 @@
 # shogi-ai
 
+## 3.0
+
+別サイトにインストールするときは、websocket.js の先頭にある uri を調整すること。
+
 ## 2.1 nginx reverse proxy
 
 しかし、これだと、別の websocket アプリと両立しないだろう。
