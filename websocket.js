@@ -4,8 +4,8 @@
 window.onload = function () {
     // NOTE: uri must be changed according to the install destination.
     // without proxy
-    uri = 'ws://localhost:20141/shogi-ws';
-    uri = 'ws://shogi-ai.melt.kyutech.ac.jp/shogi-ws';
+    //uri = 'ws://localhost:20141/shogi-ws';
+    uri = 'ws://shogi-ai.melt.kyutech.ac.jp:20141/shogi-ws';
 
     ws = new WebSocket(uri);
     ws.onopen = function () {
@@ -34,14 +34,14 @@ window.onload = function () {
 
 function selectSenkou(){
     //hkim debug
-    sendMessage('init',0);
-    //var flg = confirm('you first?');
-    //if (flg) {
-    // sendMessage('init',0);
-    //} else {
-    // setTurnFlg();
-    // sendMessage('init',1);
-    //};
+    //sendMessage('init',0);
+    var flg = confirm('you first?');
+    if (flg) {
+        sendMessage('init',0);
+    } else {
+        setTurnFlg();
+        sendMessage('init',1);
+    };
 }
 
 function removeKoma(player,moveId){
