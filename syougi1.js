@@ -40,44 +40,42 @@ function syougi(id) {
     }
     if (id == 'undefined') {
     } else if (! ifConectWsServer()){
-    alert("-No conection server(1).\n-Please wait...");
+        alert("-No conection server(1).\n-Please wait...");
     } else if (ifPlayer2Turn()) {
-    alert("-Not your turn.\n-Please wait...");
+        alert("-Not your turn.\n-Please wait...");
     } else {
-    moveFlag = true;
-    moveId = id;
-    document.getElementById(id).setAttribute('onmouseup', 'add('+id+')');
-    var koma = document.getElementById(id).getAttribute('xlink:href');
-    var cangosvgId = 100;
-    var opponentBaseId = 200;
-    var x = getXById(id);
-    var y = getYById(id);
-    var nareruFlag = 0;
-    var end = { upper: 31, lower: 545, left: 339, right: 821 };
-    // 移動できる場所の表示
-    switch (koma.toUpperCase()) {
-    case 'FU1.SVG':
-        var destinationId = id - 1;
-        var destinationY = y - 64;
-        if (! ifThereIsKoma(destinationId)) {
-        if (end.upper < destinationY) {
-            createAndAppendImageElement(destinationId, id, cangosvgId);
-        }
-        }
-        break;
-
-    case 'KY1.SVG':
-        var destinationX = x;
-        var destinationId = 0;
-        for (var destinationY = y - 64; destinationY > end.upper ; destinationY -= 64) {
-        destinationId = getIdByXandY(destinationX, destinationY);
-        var breakFlag = checkAndAppend(destinationId, id, cangosvgId);
-        if (breakFlag == 'break1') { break; }
-        if (breakFlag == 'break2') { cangosvgId++; break; }
-        cangosvgId++;
-        }
-        break;
-
+        moveFlag = true;
+        moveId = id;
+        document.getElementById(id).setAttribute('onmouseup', 'add('+id+')');
+        var koma = document.getElementById(id).getAttribute('xlink:href');
+        var cangosvgId = 100;
+        var opponentBaseId = 200;
+        var x = getXById(id);
+        var y = getYById(id);
+        var nareruFlag = 0;
+        var end = { upper: 31, lower: 545, left: 339, right: 821 };
+        // 移動できる場所の表示
+        switch (koma.toUpperCase()) {
+        case 'FU1.SVG':
+            var destinationId = id - 1;
+            var destinationY = y - 64;
+            if (! ifThereIsKoma(destinationId)) {
+                if (end.upper < destinationY) {
+                    createAndAppendImageElement(destinationId, id, cangosvgId);
+                }
+            }
+            break;
+        case 'KY1.SVG':
+            var destinationX = x;
+            var destinationId = 0;
+            for (var destinationY = y - 64; destinationY > end.upper ; destinationY -= 64) {
+                destinationId = getIdByXandY(destinationX, destinationY);
+                var breakFlag = checkAndAppend(destinationId, id, cangosvgId);
+                if (breakFlag == 'break1') { break; }
+                if (breakFlag == 'break2') { cangosvgId++; break; }
+                cangosvgId++;
+            }
+            break;
     case 'KE1.SVG':
         var destinationX = [x - 60, x + 60];
         var destinationY = y - 128;
