@@ -5,11 +5,18 @@ window.onload = function () {
     // NOTE: uri must be changed according to the install destination.
     // development, without proxy
     //uri = 'ws://localhost:20141/shogi-ws';
-    //
     //uri = 'ws://shogi-ai.melt.kyutech.ac.jp:20141/shogi-ws';
     uri = 'ws://shogi-ai.melt.kyutech.ac.jp/shogi-ws';
 
     ws = new WebSocket(uri);
+
+    ws.onclose = function() {
+        console.log(4);
+        //hkim debug
+        alert('websocket:Time up!\nYou lose.');
+        //location.reload();
+        gamesetFlag=true;
+    };
     ws.onopen = function () {
         console.log('connect');
         setWSflag();
@@ -20,13 +27,6 @@ window.onload = function () {
     };
     window.onunload = function () {
         closeWS();
-    };
-    ws.onclose = function() {
-        console.log(4);
-        //hkim debug
-        alert('websocket:Time up!\nYou lose');
-        location.reload();
-        gamesetFlag=true;
     };
     ws.onerror = function(error) {
         console.log(error);
