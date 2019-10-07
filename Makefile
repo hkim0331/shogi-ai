@@ -1,5 +1,8 @@
 # VERSION: 2.2.1
 
+run:
+	ros shogi-ai.lisp
+
 shogi-ai: shogi-ai.lisp
 	sbcl --load shogi-ai.lisp \
 		--eval "(in-package :shogi-ai)" \
