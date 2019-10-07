@@ -4,9 +4,9 @@
 window.onload = function () {
     // NOTE: uri must be changed according to the install destination.
     // development, without proxy
-    //uri = 'ws://localhost:20141/shogi-ws';
+    uri = 'ws://localhost:20141/shogi-ws';
     //uri = 'ws://shogi-ai.melt.kyutech.ac.jp:20141/shogi-ws';
-    uri = 'ws://shogi-ai.melt.kyutech.ac.jp/shogi-ws';
+    //uri = 'ws://shogi-ai.melt.kyutech.ac.jp/shogi-ws';
 
     ws = new WebSocket(uri);
 
